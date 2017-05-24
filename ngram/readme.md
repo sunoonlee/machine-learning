@@ -1,5 +1,5 @@
 ## N-gram 语言模型
 
 - 代码: [ngram.py](ngram.py)
-- 语料：张爱玲作品集
-- 笔记: [ngram.md](ngram.md)
+- 笔记: [N-gram 语言模型](https://sunoonlee.github.io/tech/2017/03/15/ngram/)
+- 生成结果: `generated_Ngram.txt` (N = 2,3,4,5)
