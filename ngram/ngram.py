@@ -82,7 +82,7 @@ def generate_sentences(m):
 
 for N in range(2, 6):
     print('\n*** reading corpus ***')
-    with open('ZhangAiLing.txt') as f:
+    with open('^ZhangAiLing.txt') as f:
         corpus = f.read()
     print('*** cutting corpus ***')
     raw_segments = jieba.cut(corpus)
