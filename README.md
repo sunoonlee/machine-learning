@@ -1,7 +1,8 @@
-# deep NLP basics
+## Machine Learning
 
-Exercises on deep learning and NLP basics
+notes and exercises
 
+* [perceptron](perceptron/perceptron.ipynb): 简单的感知机例子
 * [ngram](ngram/): count based n-gram language model
 * [naive_bayes](naive_bayes/naive_bayes_sentiment.ipynb): 朴素贝叶斯法实现文本分类
 * [word_embeddings](word_embeddings/word_embeddings.ipynb): 训练 word embeddings
