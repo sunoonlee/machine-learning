@@ -80,19 +80,24 @@ def generate_sentences(m):
     return sentences
 
 
-for N in range(2, 6):
-    print('\n*** reading corpus ***')
-    with open('^ZhangAiLing.txt') as f:
-        corpus = f.read()
-    print('*** cutting corpus ***')
-    raw_segments = jieba.cut(corpus)
-    print('*** processing segments ***')
-    segments = process_segs(raw_segments)
-    print('*** generating {}-gram count dict ***'.format(N))
-    dct = count_ngram(segments)
-    print('*** generating {}-gram probability dict ***'.format(N))
-    prob_dct = to_prob(dct)
-    #pprint(prob_dct)
-    print('*** generating sentences ***')
-    with open('generated_{}gram.txt'.format(N), 'w') as f:
-        f.write('\n'.join(generate_sentences(20)))
+def main():
+    for N in range(2, 6):
+        print('\n*** reading corpus ***')
+        with open('^ZhangAiLing.txt') as f:
+            corpus = f.read()
+        print('*** cutting corpus ***')
+        raw_segments = jieba.cut(corpus)
+        print('*** processing segments ***')
+        segments = process_segs(raw_segments)
+        print('*** generating {}-gram count dict ***'.format(N))
+        dct = count_ngram(segments)
+        print('*** generating {}-gram probability dict ***'.format(N))
+        prob_dct = to_prob(dct)
+        #pprint(prob_dct)
+        print('*** generating sentences ***')
+        with open('generated_{}gram.txt'.format(N), 'w') as f:
+            f.write('\n'.join(generate_sentences(20)))
+
+            
+if __name__ == "__main__":
+    main()
