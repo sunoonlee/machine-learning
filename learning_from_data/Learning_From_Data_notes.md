@@ -3,7 +3,9 @@
 - Course materials: [Lectures](https://work.caltech.edu/lectures.html)  |  [Homeworks](https://work.caltech.edu/homeworks.html)
 - 部分 Homework 解答和笔记: [homeworks.ipynb](https://github.com/sunoonlee/machine-learning/blob/master/learning_from_data/Homeworks.ipynb)
 ## Lec 1 - The Learning problem
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496033144892_image.png
+
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496033144892_image.png)
 
 
 逻辑线索: what is learning → can we learn → how to do it → how to do it well
@@ -49,7 +51,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
   - $\mu: P(\text{red}), or P(h(x) \neq f(x))$
   - $\nu$ : 样本中红球比例, or 样本中错误率
   - bin 对应一个概率分布确定 (或 h 确定) 的 input space.  hypothesis set H 对应 multiple bins.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496195855797_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496195855797_image.png)
 
 - the Hoeffding Inequality: $P[|\nu - \mu] \gt \epsilon] \leq 2e^{-2\epsilon^2N}$
   - 大数定理的一种形式
@@ -90,7 +93,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 
 - PLA 用于线性不可分数据时会有震荡
 - modification to PLA: the “pocket” algorithm
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496283384053_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496283384053_image.png)
 
 
 **Linear regression**
@@ -140,7 +144,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 - noisy target = [deterministic target $f(x) = E(y|x)$] + [noise $y-f(x)$]
 - 考虑噪音, 则 $y=f(x)$ → $y \sim P(y|x)$ , $E_{out}(h)$ → $\mathbb{E}_{x,y} [e(h(x), y]$
 - 加入 error measure 和 noisy targets 后的 learning diagram:
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496375358080_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496375358080_image.png)
 
 - $P(x)$ vs $P(y|x)$
   - $P(x)$ 是一个未知的概率分布. 我们假定 x 服从某种分布, 使 Hoeffding 不等式成立, 从而使学习成为可能. 但我们不需要知道 P(x) 究竟是什么.
@@ -185,7 +190,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 - positive rays: linear growth function
 - positive intevals: quadratic
 - convex sets: $2^N$ (N points are “shattered”)
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496474799988_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496474799988_image.png)
 
 
 **break point**
@@ -197,7 +203,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 - 只要存在 break point, 增长函数就是多项式的. 意味着 learning is feasible.
 - break point 的数值有助于决定某个问题需要多少数据.
 - 例子: 若 k = 2, 则 N = 3 时的 dichotomies 数量会减少一半.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496628427544_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496628427544_image.png)
 
 ## Lec6 Theory of generalization
 
@@ -270,22 +277,26 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - squared error 保证了可以这样分解而没有交叉项.
   - tradeoff: 当 H 扩大时, bias 减小而 variance 增大.
   - Lec11 进一步增加了一个 noise 项
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497067459235_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497067459235_image.png)
 
 - example: 给定*两个*数据点, 分别用 h(x) = b 和 h(x) = ax + b 去学习 f(x) = sin(pi*x)
   - 结果1个参数的前者表现更好. 可见模型复杂度需要与数据量匹配.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497069851514_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497069851514_image.png)
 
 
 **Learning Curve**
 
 - simple model vs complex model
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497081784646_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497081784646_image.png)
 
   - 纵轴是 E 关于 D 的期望: 消除 D 的不同选择带来的随机性, 反映更一般的规律.
 - 在 learning curve 上分别解释 VC analysis 和 bias-variance
   - **中间的 bias 水平线代表 best approximation in H**, 对应 $\overline{g}(x)$ . 这里其实存在一个理想化的假定, 即 best approximation (或者说 bias) 与 N 无关.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497082123229_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497082123229_image.png)
 
 - learning curves for linear regression
   - 这个例子中, 可以求得曲线方程, E_in 与 E_out 对称
@@ -307,7 +318,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
   - 例2-右图: 从 $(1,x_1,x_2)$ 变换到 $(1,x_1,x_2,x_1x_2,x_1^2,x_2^2)$. d_vc 从 3 增大到 6, 需要的数据量大致翻倍.
     - Q: 若用 $(1,x_1^2,x_2^2)$ 甚至 $(1,x_1^2 + x_2^2)$ , 降低了 d_vc, 是不是好的选择?
     - A: 选这样的特征, 是以预先偷看数据为代价的, 会影响实际的泛化能力. 这是 `data snooping`
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497245036842_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497245036842_image.png)
 
 
 **logistic regression**
@@ -348,7 +360,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
   - $\theta(s) = \tanh(s) = \frac{e^s - e^{-s}}{e^s + e^{-s}}$
     - **s ~ signal****,** $\theta$ **~ threshold**
   - $x_j^{(l)} = \theta(s_j^{(l)}) = \theta( \sum_{i=0}^{d^{(l-1)}} w_{ij}^{(l)} x_i^{(l-1)})$
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497683136938_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497683136938_image.png)
 
 
 **BP algorithm**
@@ -364,12 +377,15 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
       - 图解: 权重被上一层的 x 和下一层的delta 操控, 夹在中间
     - x 项可由前向传播计算
     - 重点是 delta 项, 用反向传播
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497686399906_image.png
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497689277026_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497686399906_image.png)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497689277026_image.png)
 
 - 反向传播计算 $\delta$
   - 注: 对于 tanh, $\theta'(s) = 1 - \theta^2(s)$
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497687922530_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497687922530_image.png)
 
 - BP 算法
   - 初始化权重 $w_{ij}^{(l)}$ 
@@ -408,17 +424,22 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
   - 例2: target 为50阶多项式, 数据无 noise
     - 这个例子里 target 的复杂度造成了一种新的 noise.
     - 即便 hypothesis 比 target function 简单很多, 依然会发生 overfit.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497697518797_image.png
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698814579_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497697518797_image.png)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698814579_image.png)
 
 - 结合 learning curve: 灰色区域里, complex model 相比 simple model, bias 较小, 但 variance 很大; E_in 较小, E_out 较大.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497699493281_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497699493281_image.png)
 
 - 一个实验: 研究 noise level 和 target complexity 对过拟合的影响
   - stochastic noise: 即之前一直在讲的 noise, 等于 y - f(x)
   - deterministic noise: 源于 target complexity 的一种更宽泛的 “noise”
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698536296_image.png
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698548158_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698536296_image.png)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698548158_image.png)
 
 
 **deterministic noise**
@@ -426,7 +447,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 - deterministic noise: the part of target $f$ that $\mathcal{H}$ cannot capture.
   - 超出模型(假设空间)的能力范围
   - 把模型比作一个小孩, H 的拟合能力就是它的语言理解能力, stochastic noise 就是它听到的环境噪音, 而 deterministic noise 如同它听到大人在说一些它听不懂的话.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497847013969_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497847013969_image.png)
 
 - 区别于 stochastic noise 的特点: 依赖于 H; 对于给定 x 是确定的.
   - 实际中的机器学习问题, H 和 D 一般是确定的, 因此两种 noise 看不出区别.
@@ -434,7 +456,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 **bias-variance-noise 分解**
 
   - 对 $\mathbb{E}_D(E_{out})$ 的分解可新增一项 stochastic noise. 而 bias 其实就是 deterministic noise.
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497708067874_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497708067874_image.png)
 
   - 对这三项的理解
     - variance 取决于 D 与 H 复杂性 (或信息量?) 的相对关系, D 越小而 H 越复杂时, variance 就越大.
@@ -480,7 +503,8 @@ https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552C
 
 - 对 $E_{in}(w) + \frac{\lambda}{N}w^Tw$ 的最小化, 就叫 weight decay. 这是最常见的一种 regularizer.
 - 为啥叫 weight decay? 在梯度下降求解时:
-https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497922398321_image.png
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497922398321_image.png)
 
 - 这里的 w 更新过程中, 有两股力量在起作用: 除了 最小化 E_in, 另一种力量是 w 逐渐减小. 后一种约束力使得 w 不能按自由地沿 E_in 梯度方向变化.
 - variations of weight decay
