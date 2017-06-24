@@ -2,6 +2,8 @@
 
 - Course materials: [Lectures](https://work.caltech.edu/lectures.html)  |  [Homeworks](https://work.caltech.edu/homeworks.html)
 - 部分 Homework 解答和笔记: [homeworks.ipynb](https://github.com/sunoonlee/machine-learning/blob/master/learning_from_data/Homeworks.ipynb)
+- 推荐安装 chrome 插件 [GitHub with MathJax](https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima), 支持 Github 上的 LaTeX 公式渲染.
+
 ## Lec 1 - The Learning problem
 
 
@@ -446,7 +448,6 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 - deterministic noise: the part of target $f$ that $\mathcal{H}$ cannot capture.
   - 超出模型(假设空间)的能力范围
-  - 把模型比作一个小孩, H 的拟合能力就是它的语言理解能力, stochastic noise 就是它听到的环境噪音, 而 deterministic noise 如同它听到大人在说一些它听不懂的话.
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497847013969_image.png)
 
@@ -463,7 +464,6 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
     - variance 取决于 D 与 H 复杂性 (或信息量?) 的相对关系, D 越小而 H 越复杂时, variance 就越大.
     - bias 反映了 H 能力的局限性. **与 D 无关**.
     - stochastic noise 取决于 target distribution P(y|x). **与 D 和 H 均无关**.
-    - 把模型比作一个勤劳的知识工作者, H 的复杂度代表他的聪明程度. 那么 high bias 情形相当于这个人脑子很笨; high variance 则相当于一个特别聪明的人在某些因素的误导下跑偏了方向, 结果造成的危害可能远远大过前一种人.
   - 借助 bias-variance-noise 分解, 理解 **how noise affects performance** (书 P125)
     - bias 和 $\sigma^2$ 项反映了两种 noise 对 cost 的**直接**影响
       - 只要 H 确定, 不管是 overfit 还是 underfit 情况, 这两项 cost 都是恒定的, 与D无关.
@@ -473,11 +473,17 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
       - **overfit 情况下这一项主导**. 反之, 当 N 很大时，var 趋于0，也就不存在 overfit.
       - noise 越大, overfit 的可能性越大. 极端情况下, 如果数据是纯粹的 noise, 那么无论怎么拟合都是过拟合.
     - 所谓 “noise 引起 overfitting”, 可以更准确地表达为: 当 H 有多余自由度时, noise 会诱发模型跑偏, 增大 variance, 发生过拟合. (当 H 足够简单时, 模型都不具有”跑偏”的能力)
-****  - 注意1: 分解的对象是对 D 和 x 取了期望的 E_out. 分解结果中, 只有第一项 variance 还与 D 有关; 而三项都包含 对 x 的期望, 反映在输入空间上的总体规律, 而非针对具体数据点.
+  - 注意1: 分解的对象是对 D 和 x 取了期望的 E_out. 分解结果中, 只有第一项 variance 还与 D 有关; 而三项都包含 对 x 的期望, 反映在输入空间上的总体规律, 而非针对具体数据点.
   - 注意2: 这个分解也是上帝视角. 面对实际问题时, 模型无法区分 signal 和 noise, 只要有多余的自由度, 就会不自觉地去拟合 noise.
   - overfitting 与 bias-variance tradeoff
     - 选择较复杂的 H 可以降低 bias (deterministic noise), 因为 H 的复杂度与 target 更接近了.
     - 但在数据量不足时, 复杂模型会用多余的自由度会去学习噪音, 结果造成 variance 很大. 而 variance 的增大很容易就会抵消 bias 的减少, 因而总的 cost 会增大, 也就是发生了过拟合.
+
+**小结**
+
+- overfitting 是指降低 E_in 无助于降低 E_out. 诱因是 noise. 发生的条件是模型 capacity 富余或数据不足.
+- stochastic/deterministic noise. 前者与H无关, 后者与H有关. 但实践中两种 noise 表现相似.
+- bias-variance-noise 分解. bias 和 noise 反映了 noise 的直接影响, variance 包含了 noise 的间接影响.
 
 
 ## Lec12 Regularization
@@ -485,13 +491,12 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 **regularization**
 
 - mathematical approach and heuristic approach
-  - 数学方法所需的假定, 实际中经常难以满足. 更有用的是从中得到的 intuition 可用于指导 heuristic 方法.
+  - 数学方法所需的假定, 实际中经常难以满足. 但从中得到的 intuition 可用于指导 heuristic 方法.
   - “regularization is as much an art as it is a science.” 实际中使用的大多为 heuristic methods.
-- regularization 为”拟合”过程增加了约束, 会同时限制模型对 signal 和 noise 的拟合. 前者会增加 bias, 后者会减少 variance.
-- regularization 是一种 soft constraint
-  - 以多项式回归为例: 限定使用低阶多项式, 是一种 hard constraint; 无限制地使用高阶多项式, 可看做不加约束; 而 regularization 提供了一个介于两者之间的约束强度.
+- regularization 为”拟合”过程增加了约束, 会同时限制模型对 signal 和 noise 的拟合. 因此一方面增加 bias, 一方面减少 variance.
+- regularization 是一种 soft constraint. 与之相对, 直接把某些函数排除在 H 之外, 是一种 hard constrain.
 - 数学推导
-  - 使用 Legendre polynomials. 特点: 彼此正交, 参数独立. 暂不深究.
+  - 使用 Legendre polynomials. 特点: 彼此正交, 参数独立.
   - 有约束的优化问题: minimize $E_{in}(w)$, 满足 $w^Tw \leq C$  ← soft-order constraints
   - 等价于一个无约束的优化问题: minimize $E_{aug}(w) = E_{in}(w) + \frac{\lambda}{N}w^Tw$ ← augmented error
     - C 越小, $\lambda$ 越大 ( $\lambda$ 还与其他因素有关, 无法解析地用 C 表示)
@@ -506,7 +511,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497922398321_image.png)
 
-- 这里的 w 更新过程中, 有两股力量在起作用: 除了 最小化 E_in, 另一种力量是 w 逐渐减小. 后一种约束力使得 w 不能按自由地沿 E_in 梯度方向变化.
+- 在 w 更新过程中, 两股力量在起作用: 除了 最小化 E_in, 另一种力量是 w 逐渐减小. 后者使 w 不能按自由地沿 E_in 梯度方向变化.
 - variations of weight decay
   - emphasis of certain weights  $\sum_{q=0}^Q \gamma_q w_q^2$  ← diagnal quadratic form
     - 比如, 可以设置不同的 $\gamma_q$ 使模型偏向 low-order fit 或 high-order fit.
@@ -524,16 +529,16 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 **choosing a regularizer**
 
-- guiding principle: direction of **smoother of simpler**
-  - 比如 netflix 用户评分预测的例子: 正则化使预测趋于平均值
+- guiding principle: direction of **smoother or simpler**
+  - 比如 netflix 用户评分预测的例子: 采用了使预测趋于平均值的正则化
 - neural-network regularizers
   - weight decay
-    - 由于 tanh 的性质, 当参数很小时, 趋于线性; 当参数很大时, 非线性更显著.
+    - 由于 tanh 的性质, 当参数很小时, 趋于线性; 当参数很大时, 非线性显著.
   - weight elimination
     - 参数越少, d_vc 越小
     - 一种 soft weight elimination: $\Omega(w) = \sum_{i,j,l} \frac{(w_{ij}^{(l)})^2} {\beta^2 + (w_{ij}^{(l)})^2}$
       - 小的参数更趋于 0 (softly eliminated), 大的参数不受影响.
-- early stopping as a regularizer
+- early stopping 也是一种 regularizer
 
 **misc**
 
@@ -541,14 +546,137 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - weight decay 中使模型偏向 low-order fit 或 high-order fit
   - weight decay 的反面: weight growth (不可取)
   - soft weight elimination: softly eliminate small weights
-- less features vs. more features + regularization
-    - 一个不恰当的类比: “小狗寻宝”. 前者就像规定小狗只能在小院里找. 后者就像拴上个狗绳子走出小院. 如果调教得当, 后者找到宝贝的可能性更大.
-    - 如果不拴狗绳让它满世界乱跑, 找回来的估计是垃圾.
+- less features vs. more features + regularization: 后者更为灵活强大
+- 小结: 
+  - regularization 是一种 soft constraint. 参数受约束时 E_in 的优化问题 等价于无约束的 augmented error 优化问题. 后者是正则化的一般形式.
+  - 常用的 regularizer: weight decay. 使函数趋于平滑.
 
 
+## Lec13 Validation
+
+**The validation set**
+
+- validation vs. regularization
+  - 都在试图优化 E_out. E_out = E_in + overfit penalty
+  - regularization estimates “overfit penalty”
+  - validation estimates E_out
+- K 个点的 validation set: 
+  - $\mathbb{E}[E_{val}(h)] = E_{out}(h)$
+    - E_val(h) 是对 E_out(h) 的无偏估计. 
+    - 注: h 是任一假设函数, 未依据 validation 做模型比选
+  - $\mathrm{var}[E_{val}(h)] = \sigma^2/K$
+  - $E_{val}(h) = E_{out}(h) \pm O(\frac{1}{\sqrt{K}})$
+- K 个点用完后还可以放回训练数据
+  - 为什么可以放回? 因为放回前已经完成了 validation, 得到了需要的 E_val, 这时放回不会影响什么.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1498106344132_image.png)
+
+- rule of thumb: K = N/5
+
+**Model selection**
+
+- “validation” 的含义: 利用这部分数据来做选择
+- 做了选择之后, E_val 不再是 E_out 的无偏估计, 会有一个 optimistic bias
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1498107112508_image.png)
+
+- validation 可以看做是对一个特殊的假设空间 H_val 的”训练”
+  - 不过 这个”训练”的 “强度” 不大, 保证 E_val 相对于 E_out 的 bias 不会很大.
+  - $H_{val} = \{ g_1^-, g_2^-,...,g_M^- \}$, 即 validation 备选的 M 个模型分别训练得到的 final hypothesis.
+  - 可以用 VC generalization bound, 得到 E_val 的 bias 的上限
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1498114450497_image.png)
+
+- data contamination
+  - 三种 error **estimates** (of E_out): E_in, E_val, E_test
+  - 数据污染的程度, 也就是这三种 estimate 的 optimistic bias 的大小.
+  - training set: 完全污染
+  - validation set: 轻微污染
+    - 为了控制污染程度, 当需要 validate 的超参数较多时, 可以设置多个 validation set
+    - validation set size 和 hyper-parameter 数量的合理比例: 建议是大约 100 data points ~ a couple of hyper-parameters
+  - test set: 完全纯净
+- validation 作为一种选择模型的方法, 优点是基本不需要什么假定.
+
+**Cross validation**
+
+- the dilemma about K
+  - 用 E_val 准确估计 E_out, 需要做好下图的两个环节
+  - K 过大时, 依靠 N-K 个训练数据得到的 $g^-$ 不理想
+  - K 过小时, E_val 的估计不准 (variance 很大)  ←  cross validation 可解决此问题
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1498123702917_image.png)
+
+- 一种极端情况: leave one out
+  - K = 1,  $g^-$最接近 g
+  - cross validation error 定义为 $E_{cv} = \frac{1}{N} \sum_{n=1}^Ne_n$ , 其中 $e_n$ 是每种 train/val set 划分方式下的 error
+  - N 个独立同分布的随机变量求平均后的 variance 会降到 1/N.
+  - 显然这 N 个 $e_n$ 并不独立, 因为它们用到的数据有很大重叠. 但如果分析 $E_{cv}$ 的 variance, 会发现它的 “有效” 数据量接近 N (而不是 1) . 也就是说, 这些 e_n 接近于相互独立.
+    - 这是 cross-validation 魔法的来源
+  - 一个例子:
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1498117888904_image.png)
+
+- 但在实际中
+  - leave one out 不现实, 意味着需要进行 N 组训练. 
+  - 可改用 V fold cross validation. 常见的是 V = 10, 即 K = N/10.
 
 
+## Lec14 SVM
 
+**Maximizing the margin**
+
+- 要求 fat margin 意味着假设空间缩小, d_vc 变小
+- 点 x_n 到超平面 $w^Tx + b = 0$ 的距离
+  - 先 normalize w, 使 $|w^Tx_n + b| = 1$
+  - 距离 = 1/||w||
+- “间隔最大” 等于以下优化问题:
+  - 最大化 1/||w|| , 满足 $min_n |w^Tx_n + b| = 1$
+- 转化为更易求解的形式
+  - 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
+
+**The solution**
+
+- 求解比较复杂. 需要用到 QP 的知识.
+  - "quadratic programming”: 受线性约束的二次优化问题求解
+- 问题与前面的 regularization 类似. 有趣的是后者是约束 $w^Tw$ 优化 E_in, 而 SVM 刚好反过来.
+- 优化目标:
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498191119604_image.png)
+
+- 对 w 和 b 求梯度. 令梯度为0, 可以将 w 和 b 用 $\alpha$ 表示. 代入 $L(w,b,\alpha)$ 得到 $L(\alpha)$.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498193699863_image.png)
+
+- 优化 $L(\alpha)$ : 把以下设定传给 QP 模块
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498189537551_image.png)
+
+- “support vector” 的含义: 即刚好在间隔边缘的点.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498191678804_image.png)
+
+- $\alpha_n$ 可以看做是模型的参数. 因为仅对 support vector 才有 $\alpha_n > 0$, 大部分 $\alpha_n = 0$. 所以 $w = \sum_{x_n\text{ is SV}} a_ny_nx_n$
+  - “有效”参数的个数大大减少了. 有助于泛化能力.
+
+**Nonlinear transforms**
+
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498192408312_image.png)
+
+- 从 输入空间 X 做非线性变换到 Z, 只需要把 $L(\alpha)$ 里的 x 内积换为 z 内积. **即使 Z 空间维数增大很多, 计算量并不会增加多少.**
+- “support vector” 图解
+  - 左图为一个线性 SVM 的 margin 和 support vector. 也可以看做一个非线性 SVM 在 Z 空间里的 margin 和 support vector.
+  - 右图为 非线性 SVM 在 X 空间里的决策界面 和 support vector. 这条曲线其实就是 Z 空间里 margin 最大的直线.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498192760588_image.png)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498192768352_image.png)
+
+- 泛化性能: $\mathbb{E}[E_{out}] \leq \frac {\mathbb{E} [\text{\# of SVs}] } {N-1}$ . **只要 SV 比例较低, 特征空间维度再高都不怕.**
+  - 上式解读: 用一个 in-sample quantity 就可以检查 out-of-sample error
+- 所以 SVM 厉害之处在于: 可以自由地在高维空间玩耍, 不必太担心计算量和泛化的问题.
+  - **complex h, but (relatively) simple H**
+- nonlinear transform 常与 soft margin 结合使用
 
 
 
