@@ -102,12 +102,8 @@
 **Linear regression**
 
 - *以下的* $w, x, y$ *为向量, 严格写法应该是* $\mathbf{w, x, y}$*. 为书写方便, 不做区分.*
-****- $E_{in}(w) = \frac{1}{N} \sum_{n=1}^N (w^Tx_n - y_n)^2 = \frac{1}{N}\|Xw - y\|^2$
-
-
+- $E_{in}(w) = \frac{1}{N} \sum_{n=1}^N (w^Tx_n - y_n)^2 = \frac{1}{N}\|Xw - y\|^2$
   - $X =\left[ \begin{array}{cc} - x_1^T - \\ -x_2^T- \\ ... \\ -x_N^T-\end{array} \right]$, $y = \left[ \begin{array}{cc} y_1 \\ y_2 \\ ... \\ y_N \end{array} \right]$
-
-
 - $\nabla E_{in}(w) = \frac{2}{N} X^T(Xw - y)$. 令 $\nabla E_{in}(w) = 0$ , 则 $X^TXw = X^Ty \Rightarrow w = X^{\dagger}y$ 
   - $X^{\dagger} = (X^TX)^{-1}X^T$(pseudo-inverse of X)
   - X is a tall matrix. 一般 $X^TX$ 是可逆的.
@@ -126,6 +122,7 @@
   - transformation 若选择不当, 会造成泛化的困难
 - 例子: Hw2 - Q8-10. 给定”真实”决策界面为圆形的数据.
   - transformation: $(1, x_1, x_2) \rightarrow (1, x_1, x_2, x_1x_2, x_1^2, x_2^2)$
+  
 ## Lec4 Error and Noise
 
 **Error measures**
@@ -360,7 +357,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - notations
   - $w_{ij}^{(l)} \left\{ \begin{array}{ll} 1\leq l\leq L & \text{layers} \\ 0\leq i\leq d^{(l-1)} & \text{inputs} \\ 1\leq j\leq d^{(l)} & \text{outputs} \end{array} \right.$
   - $\theta(s) = \tanh(s) = \frac{e^s - e^{-s}}{e^s + e^{-s}}$
-    - **s ~ signal****,** $\theta$ **~ threshold**
+    - s ~ signal, $\theta$ ~ threshold
   - $x_j^{(l)} = \theta(s_j^{(l)}) = \theta( \sum_{i=0}^{d^{(l-1)}} w_{ij}^{(l)} x_i^{(l-1)})$
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497683136938_image.png)
@@ -623,27 +620,22 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec14 SVM
 
+统计学习方法 讲得更细. 笔记见 +ml_LiHangBook_lim: Ch7-SVM
+
 **Maximizing the margin**
 
 - 要求 fat margin 意味着假设空间缩小, d_vc 变小
 - 点 x_n 到超平面 $w^Tx + b = 0$ 的距离
-  - 先 normalize w, 使 $|w^Tx_n + b| = 1$
-  - 距离 = 1/||w||
-- “间隔最大” 等于以下优化问题:
-  - 最大化 1/||w|| , 满足 $min_n |w^Tx_n + b| = 1$
-- 转化为更易求解的形式
-  - 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
+  - 先 normalize w, 使 $|w^Tx_n + b| = 1$. 则距离 = 1/||w||
+- “间隔最大” 等于以下优化问题: 最大化 1/||w|| , 满足 $\min_n |w^Tx_n + b| = 1$
+- 转化为更易求解的形式: 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
 
 **The solution**
 
 - 求解比较复杂. 需要用到 QP 的知识.
-  - "quadratic programming”: 受线性约束的二次优化问题求解
-- 问题与前面的 regularization 类似. 有趣的是后者是约束 $w^Tw$ 优化 E_in, 而 SVM 刚好反过来.
-- 优化目标:
-
-![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498191119604_image.png)
-
-- 对 w 和 b 求梯度. 令梯度为0, 可以将 w 和 b 用 $\alpha$ 表示. 代入 $L(w,b,\alpha)$ 得到 $L(\alpha)$.
+- 与前面的 regularization 有点类似. 有趣的是 regularization 是约束 $w^Tw$ 优化 E_in, 而 SVM 刚好反过来.
+- 对偶问题 $\max_{\alpha} \min_{w,b} L(w,b,\alpha)$
+- 对 w 和 b 求梯度, 并令梯度为0. 代入 $L(w,b,\alpha)$ 得到 $L(\alpha)$.
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498193699863_image.png)
 
@@ -651,7 +643,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498189537551_image.png)
 
-- “support vector” 的含义: 即刚好在间隔边缘的点.
+- support vector: 刚好在间隔边缘的点. 对应 $\alpha_n > 0$
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498191678804_image.png)
 
@@ -664,7 +656,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498192408312_image.png)
 
 - 从 输入空间 X 做非线性变换到 Z, 只需要把 $L(\alpha)$ 里的 x 内积换为 z 内积. **即使 Z 空间维数增大很多, 计算量并不会增加多少.**
-- “support vector” 图解
+- support vector 图解
   - 左图为一个线性 SVM 的 margin 和 support vector. 也可以看做一个非线性 SVM 在 Z 空间里的 margin 和 support vector.
   - 右图为 非线性 SVM 在 X 空间里的决策界面 和 support vector. 这条曲线其实就是 Z 空间里 margin 最大的直线.
 
@@ -679,6 +671,276 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - nonlinear transform 常与 soft margin 结合使用
 
 
+## Lec15 Kernel methods
 
+**The kernel trick**
+
+- Kernel 是一种 generalized inner product.
+  - 首先从上一讲最后 SVM 的非线性变换引入. 
+    - 经过非线性变换, 优化目标 $L(\alpha)$ 的变化是 x 的内积 $x_n^Tx_m$ 变成了 z 的内积 $z_n^Tz_m$
+    - 非线性变换需要显式地给出映射函数 $z = \Phi(x)$ , 也就知道了 Z 空间的具体情况. 而我们希望能弱化对这些信息的要求.
+  - 令 $z^Tz' = K(x,x')$ ,  即 kernel. 
+    - 我们可以省去对 x 和 x’ 做非线性变换的过程, 直接定义 K(x, x’)  ← 这就是 trick 所在.
+    - 可以把 K(x,x’) 看做 X 空间上一种广义的内积
+    - 只需要**存在**空间 Z 使得 K(x, x’) 是 Z 上的内积, 不需要具体知道 Z 是什么样.
+    - 比如 多项式核 $K(x,x') = (ax^Tx' + b)^Q$, 总可以表示成某种多项式变换下的内积.
+    - 比如 高斯核 $K(x,x') = \exp(-\gamma||x-x'||^2)$ . 可以表示为某种无限维空间里的内积.
+- 注意: 使用 kernel trick 后, X 空间里的 “距离” 并不能代表 margin. margin 是定义在 Z 空间上的. 
+  - 如果在 X 空间里画出决策界面, 发现有些 support vector 离它比较远, 也是可能的.
+- 使用 kernel trick 后的假设函数:
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499140397015_image.png)
+
+- 如何判断 K(x,x’) 是某个空间Z上的内积? 三种做法
+  - by construction
+  - math properties
+    - Mercer’s condition: K(x,x’) is a valid kernel iff (if and only if): 
+      - 对称 and 矩阵 [K(x_i, x_j)] 是半正定的
+  - 有些人不管 Z 存在与否, 找一个 Kernel 就开始动手. 这样做在理论上站不住脚, 但有时候也 work.
+
+**Soft-margin SVM**
+
+- 参 +ml_LiHangBook_lim: 7.2-线性支持向量机与软间隔最大化 
+- 硬间隔 → 软间隔
+  - 目标函数: 在 $\frac{1}{2} w^Tw$ 基础上增加一项对误分类的惩罚 $C\sum_{n=1}^N\xi_n$
+  - 神奇的是, 最终交给 QP 的优化目标 $L(\alpha)$ 是基本相同的, 唯一区别是增加了约束 $\alpha_n \leq C$
+- 两种”不可分”: 常见的是二者的结合
+  - slightly non-separable: 用 soft margin 解决
+  - seriously non-separable: 用 kernel 解决
+- types of support vectors:
+  - margin SVs. $( 0<\alpha_n<C )$
+  - non-margin SVs. $( \alpha_n = C )$
+- C 的确定: 依靠 validation
+
+**Misc**
+
+- 计算的瓶颈在 quadratic programming
+
+
+## Lec16 Radial Basis Functions
+- 这一讲把 RBF 与机器学习里的很多内容联系起来了(近邻法, 神经网络, SVM, 正则化, 聚类). 值得重温.
+- RBF 本身也是一类模型. 跟采用 RBF kernel 的 SVM 是两回事.
+
+ 
+[**Radial basis function - Wikipedia**](https://en.wikipedia.org/wiki/Radial_basis_function)
+- 一般定义: a real-valued function whose value depends only on the distance from the origin, so that $\phi(x) = \phi(||x||)$
+- **常用 sums of radial basis function 来拟合函数**
+  - // 由本 Lecture 最后一部分可知, 高斯 RBF 对应一种 smoothest interpolation
+- 常见种类: (记 $r = ||x-x_i||$)
+  - **Gaussian**  $\phi(r) = \exp(-(\epsilon r)^2)$. ← 本课程提到的 RBF 基本是指这种
+    - 特点: 取值范围 (0, 1], 随距离增大而减小 →  可作为 [Similarity measure](https://en.wikipedia.org/wiki/Similarity_measure)
+  - Multiquadric (注: 不是 Multiquadratic) $\phi(r) = \sqrt{1+(\epsilon r)^2}$
+  - Inverse quadratic $\phi(r) = \frac{1}{1+(\epsilon r)^2}$
+  - …
+
+**Basic RBF model**
+
+- 模型
+  - Each $(x_n, y_n) \in D$ influnces h(x) **based on ||x - x_n||**  → 这就是所谓 **radial**
+  - Standard form: $h(x) = \sum_{n=1}^N w_n \exp (-\gamma||x-x_n||^2)$
+    - $\exp (-\gamma||x-x_n||^2)$ 就是所谓 **basis function**. (还有其他类型 basis function. 这种最常见.)
+- 学习算法
+  - N 个参数. (当然, 实际中不可能用 N 个参数, 否则泛化性能极差)
+  - 直接令 E_in = 0. N 个数据 → N 个方程.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499671800852_image.png)
+
+- effect of $\gamma$: $\gamma$ 较小时, 曲线较平滑 (smooth interpolation)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499679650315_image.png)
+
+- 以上是 Basic RBF 用于 regression 时的形式. 当用于分类时可以取 sign.
+
+**RBF and nearest neighbors**
+
+- 二者的共同点: 基于相似性
+- 近邻法: 
+  - 最不平滑的情形: 选1个点
+  - 平滑化: k个点取平均或投票
+- RBF: 可以看作近邻法的一种 soft version.
+  - 最不平滑的情形: basis function 取为圆柱体(假设 X 为二维), 即, 在某半径范围内该点贡献为定值, 在该半径外贡献为0.
+  - 平滑化: 高斯 RBF.
+
+**RBF with K centers**
+
+- 解决前面 Basic RBF model 参数数量过多的问题: use K << N centers: $\mu_1,...\mu_K$ instead of $x_1,...,x_N$. (由于求平均, centers 一般不是数据集里的点)
+- $h(x) = \sum_{k=1}^K w_k \exp (-\gamma||x-\mu_k||^2)$
+  - 这里除了 $w_k$ (K 个标量) 之外, $\mu_k$ 也是参数 (K 个向量). 如果 $\mu_k$ 也需要利用训练集的 y 值来确定, 那么泛化问题仍未得到解决. 
+    - // 写 LaTeX 时偷懒, 没怎么区分向量 $\mathbf{w}$ 和标量 $w$. 在具体问题下千万别混淆了. 像 RBF 里的 w 是标量.
+  - 好消息是, 确定 $\mu_k$ 只需要训练集的 x (inputs). 若只利用数据集的 inputs 而不用 labels, 就不算 data snooping.
+- **choose the centers**: K-means clustering (一种无监督方法)
+  - 目标: minimize $\sum_{k=1}^K\sum_{x_n\in S_k} ||x_n-\mu_k||^2$, 变量包括 $\mu_k, S_k$
+  - 寻找全局最优是 NP-hard
+    - 回顾: 对神经网络求全局最小值也是 NP-hard, 但实际中采用一些 heuristic 方法 (如随机初始化, 梯度下降, 反向传播) 得到”较好”的局部最小值, 一般也能解决问题.
+    - 这里的处理思路也类似.
+  - **an iterative algorithm: Lloyd’s algorithm**
+    - 循环: { 固定 $\mu_k$ 优化 $S_k$; 固定 $S_k$ 优化 $\mu_k$ }
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499738294397_image.png)
+
+- **choose the weights**
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499739703178_image.png)
+
+
+**RBF network vs. two-layer neural network**
+
+- 相似处: 都是 input → features → output (combinations of features). 
+  - RBF 函数如同隐层的激活函数.
+  - 另外这两者又都类似 SVM. input → kernel → linear combination. 选择合适的 kernel, 有可能用 SVM 实现一个两层神经网络.
+- 区别: 
+  - RBF network 的 feature 与距离有关, 距离很远时贡献很小. 单个 feature 的作用相对来说集中在输入空间的某个局部. 
+  - 简略地说, 作为”激活函数”, RBF is “local”, sigmoid is “global”.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499743473790_image.png)
+
+
+**choosing** $\gamma$
+
+- 前面由 clustering 方法得到了 $\mu_k$ , 现在真正需要确定的参数是 $w_k$ 和 $\gamma$
+- 如果用梯度下降等方法同时求 $w_k$ 和 $\gamma$, 就浪费了可以直接用 psuedo-inverse 求解 $w_k$ 的便利性.
+- 更好的选择是 iterative approach ( 思想与 Lloyd’s algorithm 类似)
+  - 循环: { 固定 $\gamma$ , 用 psuedo-inverse 直接求解 $w_k$ ; 固定 $w_k$ , 用梯度下降等方法优化 $\gamma$ ; }
+  - 这就是 **EM algorithm** in mixture of Gaussians
+- 可以对不同的 center $\mu_k$ 选用不同的 $\gamma_k$ , 这样 $\gamma$ 从单个参数变为一个参数向量
+
+**RBF and SVM/kernel methods**
+
+- 二者都使用了 RBF 函数. 
+- 二者都是以少数点 (相对于样本数 N) 为”核心”建立起来的: RBF 模型由 clustering 得到少数 centers, SVM 则基于少量的 support vectors. 
+  - centers 和 SVs 的对比很有意思. centers 分散在整个输入空间上, 代表了不同的 clusters. SVs 则集中在决策界面附近.
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499828634003_image.png)
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499828646321_image.png)
+
+- 给了一个例子, 采用 RBF kernel 的 SVM 表现比 regular RBF 好. (普遍来说 SVM 的性能更好, 除非输入有明显的 clusters)
+
+**RBF and regularization**
+
+- [function approximation](https://en.wikipedia.org/wiki/Function_approximation) vs. machine learning: 机器学习在某种意义上就是一种 function approximation.
+- RBF 完全可以基于 regularization 推导得出 → 反映了 RBF 本身固有的优良特性.
+  - 从函数的平滑性出发, 选择下图中的正则化项. 经过一系列推导, 求出的就是 (高斯) RBF!
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499747534969_image.png)
+
+## Lec17 Three Learning Principles
+- Occam’s razor 关乎模型选择. sampling bias 关乎数据的获取. data snooping 关乎数据的使用.
+
+**Occam’s razor**
+
+- a famous quote: “An explanation of the data should be made as simple as possible, but no simpler"
+- **Occam’s razor: “The simplest model that fits the data is also the most plausible.”**
+- 什么是 simple model
+  - measures of complexity
+    - complexity of h. (联想: 正则化里的 augmented error) 例子:
+      - 信息论里的 MDL: minimum description length.
+      - order of polynomial
+    - complexity of H (联想: generalization error bound). 例子: 
+      - 信息论里的 entropy
+      - VC dimension
+    - 一般直觉上的 simple 是关于前者. 而理论证明一般用后者.
+    - 二者大体上是一回事
+      - complex $\approx$ one of many.  simple $\approx$ one of few.
+      - 比如, 从 MDL 角度, 如果 k bits specify h, 说明 h is one of 2^k elements of a set H
+      - 比如, 高阶的多项式 h 对应的集合 H 也更大.
+      - 但 SVM 是个例外: h 较复杂, 但 H 比较小.
+  - 解读一个常见的骗局: 选 32 个人发 5 轮邮件, 预测股票/球赛, 总有一个人会收到连续五次正确的预测.
+    - 为什么这种预测一文不值? 就这个任务而言, 它的假设空间 H 太复杂(增长函数是 2^N), 包括了所有可能的 32 种情形. 完全没有泛化能力.
+    - 但上当的人看不到整个假设空间
+- why is simpler better
+  - better model 不是指多么 elegant, 而是 better E_out
+  - formal proof (形式化论证?)
+    - 简单的模型 H 包含的 h 较少 ~ $m_H(N)$
+    - => 准确拟合给定数据集的可能性更小 ~ $m_H(N)/2^N$.
+    - => 准确拟合的意义更重大
+  - axiom of non-falsifiability: 要想使数据证实一个 hypothesis, 那么数据需要有证伪 hypothesis 的可能性.
+
+**sampling bias**
+
+- **If the data is sampled in a biased way, learning will pro­duce a similarly biased outcome.**
+- 例子
+  - 1948年美国大选时的电话调查结果
+  - 基于现有公司 N 年内的股票表现预测未来市场 → 漏掉了那些没撑过 N 年的公司
+  - …
+- VC analysis 所做的 assuptions 其实很少, 但其中这一条是不可忽略的: 用于 training 和 testing 的数据来自同一分布.
+- 对策: matching the distributions
+  - 对某些 sampling bias, 可以通过对训练数据的处理, 让其分布匹配 test data.
+  - 但也有一些 sampling bias 是无法解决的, 比如 当输入空间中的某些区域 (如美国大选例子中 没装电话的人口) 在训练集上 P = 0 而在测试集上 P>0 时. 
+
+**data snooping**
+
+- **If a data set has affected any step in the learning process, its ability to assess the outcome has been compromised.**
+- data snooping 是机器学习中最常见的陷阱.
+  - 一方面, 有些 data snooping 非常微妙, 防不胜防
+  - 另一方面, data snooping 往往会带来比较”好”的结果, 是一种美味的毒药
+- 可以利用**关于 target function 和 input space 的各种信息**, 但不能碰数据, 除非你付出相应的代价.
+  - data snooping 与 训练过程中利用数据 的区别是什么? 
+- 场景1: 直接 looking at the data, 来缩小 H 范围
+- 场景2: 一个微妙的例子
+  - 先 normalize data, 再划分训练和测试集  →  错了! normalize data 时, 用到了测试集的数据信息! 应该先划分数据, 再对训练集 normalize
+  - 即便只是很轻微的 data snooping, 若是在某些非常敏感的领域, 造成的影响也会很大.
+- 场景3: reuse of a data set
+  - 如果在一个数据集上试验了多种模型, 最后的 VC dimension 应该考虑所有试过的模型, 而不是只考虑最后一种模型. (然后判断手头的数据量是否足以支撑这个总的 VC dimension ← 这是 snooping 的代价)
+  - 参考别人在同一数据集上的工作成果, 也是间接的 data snooping
+- 两种对策:
+  - avoid data snooping. 这需要非常严格的规范.
+  - account for data snooping.
+    - 代价可能是 VC dimension 增大, 进而需要更多的数据才能保证泛化能力
+    - 有时 data snooping 的代价易于衡量, 比如 validation. 但有时不然, 比如直接 looking at the data.
+- 一个例子
+  - 为了测试股票市场上 “buy and hold” 策略的长期表现,  选用标普 500 所有公司 50 年的数据
+  - 这实际上是 sampling bias caused by snooping
+    - 这里说的 snooping 意义更广一些, 还有点不理解.
+
+
+## Lec18 Epilogue
+- 描绘机器学习地图.
+- 简单介绍进一步学习的两个重要方向: 贝叶斯学习, aggregation.
+
+**The map of machine learning** 
+
+
+![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499916064245_image.png)
+
+- paradigms
+  - 监督学习的主要问题在于 **信息**: 数据集是否有足够的信息来拟合 target function 并保证泛化能力.
+  - 强化学习则不然. 其关键在于寻找最优策略的算法.
+  - active learning: 不事先给一堆 labeled data. 而是在学习时 interactively query the user.
+  - online learning: 数据依序输入, 结果不断更新
+- Theory
+  - VC 是一套很有价值的理论, 从中获得的 insights 能指导实践. bias-variance 提供了另一种角度.
+  - 本课程没讲到的两大块理论: complexity - 从计算复杂度角度理解机器学习. bayesian - 把机器学习看做一个概率问题, 关注联合概率分布.
+
+**Bayesian learning**
+
+- $P(D|h=f)$ vs. $P(h=f|D)$
+  - $P(D|h=f)$: 给定 D 时, 就等于 f 的 likelihood $L(h=f|D) = P(D|h=f)$
+  - $P(h=f|D)$: 给定 D 时 f 的 probability, 后验概率
+  - 对二者的混淆会造成 [Prosecutor's fallacy](http://www.wikiwand.com/en/Prosecutor%27s_fallacy)
+- 可以用贝叶斯定理把二者联系起来: $P(h=f|D) = \frac{P(D|h=f)P(h=f)}{P(D)} \propto P(D|h=f)P(h=f)$
+  - 后验概率与 (likelihood x 先验概率) 成正比
+  - 只关心不同 h 的比较, 所以分母可以忽略
+- Bayesian learning 最富争议的就在于先验概率的假定. 一般来说这种假定是比较强的. 因此整个推断可能是建立在一个比较危险的基础上.
+- 以下两类情况下 Bayesian learning is justified
+  - the prior is valid. 即所采用的先验概率是合理有根据的. 此时 Bayesian learning 几乎是最好的选择.
+  - the prior is irrelevant. 随着数据量的增大, 结果受先验概率假定的影响可能越来越小. 这时可以把先验概率看做一种 computational catalyst, 仅为了计算的方便.
+- 待补充阅读: +ml_DLbookCh5_mlbasics_lim: 5.6-Bayesian-Statistics 
+
+**Aggregation methods**
+
+- aggregation 代表了一大类方法. 是把不同模型得到的 solutions 组合起来.
+  - 回归问题可求平均, 分类问题可以投票
+  - 也叫 ensemble learning, boosting
+- aggregation 与 2-layer learning 的区别: 前者的不同单元是**各自独立**学习的
+- 两类 aggregation: 
+  - after the fact. 可称为 “blending”
+  - before the fact: 事先就决定要组合.
+- boosting: 按顺序产生不同的 h, 让每个 h 与前面已有的 h decorrelate.
+  - 具体有一种算法叫 adaptive boosting. 算法里存在一个类似 SVM 里 margin 的概念.
+- blending - after the fact
+  - 以回归问题为例. 可以把不同 solution 线性组合. $g(\mathbf{x}) = \sum_{t=1}^T\alpha_t h_t(\mathbf{x})$
+  - 有些组合系数可能为负. 这不代表相应的 solution 没有价值, 而可能是因为与其他某些 solution 比较相似.
+  - #quiz 如何衡量某种 solution 在其中的贡献?
 
 
