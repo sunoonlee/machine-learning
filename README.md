@@ -1,7 +1,7 @@
 ## Machine Learning
 
 Notes
-- [Learning from data](learning_from_data/) Caltech 的机器学习基础课 (https://work.caltech.edu/telecourse.html)
+- [Learning from data 学习笔记](learning_from_data/Learning_From_Data_notes.md) (Caltech 的机器学习基础课 https://work.caltech.edu/telecourse.html)
 
 Exercises
 * [perceptron](perceptron/perceptron.ipynb): 简单的感知机例子
