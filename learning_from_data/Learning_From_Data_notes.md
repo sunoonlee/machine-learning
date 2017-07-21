@@ -300,7 +300,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - learning curves for linear regression
   - 这个例子中, 可以求得曲线方程, E_in 与 E_out 对称
   - generalization error = $2\sigma^2(\frac{d+1}{N})$ , $\sigma$ 是 noise 的标准差
-    - to get reasonable generalization, $N \varpropto d_{vc}$ . 这与分类问题的结论一致.
+    - to get reasonable generalization, $N \propto d_{vc}$ . 这与分类问题的结论一致.
 
 
 ## Lec9 The linear model II
