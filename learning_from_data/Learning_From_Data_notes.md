@@ -1,35 +1,34 @@
 # ml_LearningFromData_lim
 
+[TOC]
+
 - Course materials: [Lectures](https://work.caltech.edu/lectures.html)  |  [Homeworks](https://work.caltech.edu/homeworks.html)
 - 部分 Homework 解答和笔记: [homeworks.ipynb](https://github.com/sunoonlee/machine-learning/blob/master/learning_from_data/Homeworks.ipynb)
 - 推荐安装 chrome 插件 [GitHub with MathJax](https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima), 支持 Github 上的 LaTeX 公式渲染.
 
-## Lec 1 - The Learning problem
-
+## Lec 1 The Learning problem
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496033144892_image.png)
 
-
 逻辑线索: what is learning → can we learn → how to do it → how to do it well
-
 
 - the essence of machine learning
   - a pattern exists
   - we cannot pin it down mathematically
   - we have data on it
 
-**components of learning**
+### components of learning
 
 - target function $f$ vs. final hypothesis $g$
   - $f$ is “ideal” and **unknown**. $g$ 是对 $f$ 的近似. $g\in H$ (hypothesis set)
 - hypothesis set + learning algorithm = `the learning model`
 
-**a simple model: perceptron**
+### a simple model: perceptron
 
 - 引入 $x_0$ = 1, 则 $h(x) = sign(w^Tx)$
 - perceptron 学习算法的 intuition: 向量加法, 向量夹角
 
-**types of learning**
+### types of learning
 
 - basic premise of learning
   - **“using a set of observations to uncover an underlying process”**
@@ -38,15 +37,15 @@
       - observations = samples
 - unsupervised learning: given only input. a way of getting a higher-level representation of the input. 如, 听广播学外语.
 
-**misc**
+### misc
 
 - learning vs memorizing (overfitting)
 - bottleneck of machine learning: generalization
 
 
-## Lec2 - Is Learning Feasible?
+## Lec2 Is Learning Feasible?
 
-**probability to the rescue 概率拯救”学习”**
+### probability to the rescue 概率拯救”学习”
 
 - 唯有在概率的意义上, “学习”才是可能的.
 - 类比: bin of red and green marbles (用来揭示 probability sense of learning)
@@ -64,7 +63,7 @@
   - tradeoff: N, $\epsilon$, and probability bound.
 - 逻辑上的转换 (cause vs. effect): $\nu \approx \mu \Rightarrow \mu \approx \nu$
 
-**connection to learning**
+### connection to learning
 
 - notation: in-sample/out-of-sample error: $E_{in}(h), E_{out}(h)$
 - 对任意一个**固定**的 h, 有 $P[|E_{in}(h) - E_{out}(h)| > \epsilon] \leq 2e^{-2\epsilon^2N}$
@@ -78,20 +77,20 @@
     - 常见的模型, 实际上 M 无穷大. 后面会解决这个问题.
   - 从 verification is feasible 到 learning is feasible
 
-**notes**
+### notes
 
 - 统计学 和 机器学习 的区别之一:
   - 统计学中的理论较严谨, 会做较多或较强的假设
   - 机器学习理论一般更注重实际中的普遍适用性, 减少所需的前提假设
 
 
-## Lec3 - The Linear Model I
+## Lec3 The Linear Model I
 
-**input representation**
+### input representation
 
 - 特征提取: 仅仅是简单地提取出两个特征( intensity, symmetry), 在两个手写数字的二分类问题上就能有比较好的效果
 
-**Linear classification**
+### Linear classification
 
 - PLA 用于线性不可分数据时会有震荡
 - modification to PLA: the “pocket” algorithm
@@ -99,7 +98,7 @@
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496283384053_image.png)
 
 
-**Linear regression**
+### Linear regression
 
 - *以下的* $w, x, y$ *为向量, 严格写法应该是* $\mathbf{w, x, y}$*. 为书写方便, 不做区分.*
 - $E_{in}(w) = \frac{1}{N} \sum_{n=1}^N (w^Tx_n - y_n)^2 = \frac{1}{N}\|Xw - y\|^2$
@@ -110,7 +109,7 @@
 - // 这种 Normal Equation 方法的复杂度是 $O(n^3)$ , 当 n 很大时, 效率不如梯度下降法 ($O(kn^2)$)
 - // $\frac{\partial(Xw)}{\partial w} = X^T$
 
-**nonlinear transformation**
+### nonlinear transformation
 
 - 对线性模型, 如线性回归 $\sum_{i=0}^dw_ix_i$ 或感知机 $sign(\sum_{i=0}^dw_ix_i)$, **“线性” 是关于权重** $w_i$ **, 而不是关于输入** $x_i$ **.** (linearity in weights, not in inputs/data**) .** 
   - 因此, 对数据做 non-linear transformation 不影响模型的线性本质
@@ -118,14 +117,14 @@
   - features are high level representations of raw inputs
 - nonlinear transformation
   - $\mathbf{x \rightarrow z}$
-  - $g(\mathbf{x}) = sign(\tilde \mathbf{w} \Phi(\mathbf{x}))$.  权重作用于变换后的空间 $\mathcal{Z}$ 而非原始输入空间 $\mathcal{X}$
+  - $g(\mathbf{x}) = sign(\mathbf{\tilde w} \Phi(\mathbf{x}))$.  权重作用于变换后的空间 $\mathcal{Z}$ 而非原始输入空间 $\mathcal{X}$
   - transformation 若选择不当, 会造成泛化的困难
 - 例子: Hw2 - Q8-10. 给定”真实”决策界面为圆形的数据.
   - transformation: $(1, x_1, x_2) \rightarrow (1, x_1, x_2, x_1x_2, x_1^2, x_2^2)$
-  
+
 ## Lec4 Error and Noise
 
-**Error measures**
+### Error measures
 
 - **也叫 error function / cost / objective / risk**
 - to quantify how well h approximates f
@@ -137,7 +136,7 @@
   - Plausible measures (analytically good) : 如 squared error $\equiv$ Gaussian noise
   - Friendly measures (easy to use/optimize) : 如 closed-form solution, convex optimization
 
-**Noisy targets**
+### Noisy targets
 
 - 学习的目标一般情况下并不是 deterministic function, 而是一个概率分布 $P(y|x)$.
 - noisy target = [deterministic target $f(x) = E(y|x)$] + [noise $y-f(x)$]
@@ -151,7 +150,7 @@
   - $P(y|x)$ 是 unknown target distribution, 是学习的目标 (注: 不是 $P(x, y)$ ).
   - 训练数据由 $P(x,y)$ 独立同分布生成.
 
-**接下来 12 个 lecture 要下一盘很大的棋**
+### 接下来 12 个 lecture 要下一盘很大的棋
 
 - 我们需要的结果: $E_{out}(g) \approx 0$ . 可拆分为:
   - $E_{out}(g) \approx E_{in}(g)$
@@ -163,7 +162,7 @@
 
 ## Lec5 Training versus Testing
 
-**解决 M 无穷大的问题**
+### 解决 M 无穷大的问题
 
 - $P[|E_{in} - E_{out}| > \epsilon] \leq 2Me^{-2\epsilon^2N}$
   - M 是为利用/污染了训练数据而付出的代价
@@ -184,7 +183,7 @@
   - $|\mathcal{H}(x_1,...,x_N)|$ 跟数据点的选取有关, 所以要取最大值.
   - 可看作 **effective** number of hypotheses
 
-**examples (growth functions)**
+### examples (growth functions)
 
 - positive rays: linear growth function
 - positive intevals: quadratic
@@ -193,7 +192,7 @@
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496474799988_image.png)
 
 
-**break point**
+### break point
 
 - 定义
   - 使 H 无法 shatter 数据集的 k  / 使 $m_{\mathcal{H}}(k) < 2^k$ 的 k
@@ -207,13 +206,13 @@
 
 ## Lec6 Theory of generalization
 
-**Proof that** $m_H(N)$ **is polynomial**
+### Proof that** $m_H(N)$ **is polynomial
 
 - $B(N,k)$ : maximum number of dichotomies on N points, with break point k. 不限定 H, 故 $m_H(N) \leq B(N,k)$.
 - 用递归的方法找 $B(N,k)$ 的上界: $B(N,k) \leq \sum_{i=0}^{k-1} {N \choose i}$
 - 所以 $m_H(N) \leq \sum_{i=0}^{k-1} {N \choose i}$ , max power is $N^{k-1}$
 
-**Proof that** $m_H(N)$ **can replace M**
+### Proof that** $m_H(N)$ **can replace M
 
 - 结合 **Textbook 2.1.4 The VC generalization bound**
 - 证明过程较复杂, 忽略.
@@ -223,7 +222,7 @@
 
 ## Lec7 The VC dimension
 
-**The VC dimension**
+### The VC dimension
 
 - The VC dimension $d_{vc}$
   - the most points H can shatter
@@ -240,7 +239,7 @@
 - 例子: d 维感知机的 $d_{vc} = d + 1$, 刚好等于参数个数
 - 复杂模型如神经网络的 d_vc 很难准确获得, 只能得到一个 loose bound, 用于相对比较.
 
-**Interpreting**
+### Interpreting
 
 - **VC dimension 与模型自由度的关系**
   - VC dimension 可看做**”有效”**的参数个数, 或者模型的”自由度’. (The VC dimension measures these effective parameters or 'degrees of freedom' that enable the model to express a diverse set of hypotheses.)
@@ -249,7 +248,7 @@
 - **VC dimension 与 需要的数据量 的关系**
   - rule of thumb: **to get reasonable generalization,** $N \geq 10 d_{vc}$
 
-**Generalization bounds**
+### Generalization bounds
 
 - $E_{out} \leq E_{in} + \Omega(N,H,\delta)$ with probability $\geq 1-\delta$
   - $\Omega(N,H,\delta) = \sqrt{\frac{8}{N} ln\frac{4m_H(2N)}{\delta}}$ : bound to generalization error.
@@ -264,7 +263,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - Lec5~7 以二分类的 binary error 为例, 分析方法是 VC analysis, 结果是 $E_{out} \leq E_{in} + \Omega$
 - Lec8 以 squared error measures 为例, 分析方法是 bias-variance analysis. 结果是将 $E_{out}$ 分解为 bias + variance.
 
-**Bias and Variance**
+### Bias and Variance
 
 - **bias-variance 分析的对象是** $\mathbb{E}_D(E_{out}(g^D))$ **, 对 D 和 x 都取了期望, 反映的是不依赖于特定 D 且基于整个输入空间的规律.**
   - 其中 $E_{out}(g^D) = \mathbb{E}_x[(g^D(x) - f(x))^2]$
@@ -285,13 +284,13 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497069851514_image.png)
 
 
-**Learning Curve**
+### Learning Curve
 
 - simple model vs complex model
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497081784646_image.png)
 
-  - 纵轴是 E 关于 D 的期望: 消除 D 的不同选择带来的随机性, 反映更一般的规律.
+- 纵轴是 E 关于 D 的期望: 消除 D 的不同选择带来的随机性, 反映更一般的规律.
 - 在 learning curve 上分别解释 VC analysis 和 bias-variance
   - **中间的 bias 水平线代表 best approximation in H**, 对应 $\overline{g}(x)$ . 这里其实存在一个理想化的假定, 即 best approximation (或者说 bias) 与 N 无关.
 
@@ -307,7 +306,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 > The linear model can be used as a building block for other popular tech­niques. A cascade of linear models, mostly with soft thresholds, creates a neural network. A robust algorithm for linear models, based on quadratic programming, creates support vector machines. An efficient approach to non­linear transformation in support vector machines creates kernel methods. A combination of different models in a principled way creates boosting and en­semble learning. There are other successful models and techniques, and more to come for sure.
 > -- Learning From Data (book), P181
 
-**generalization in nonlinear transformation**
+### generalization in nonlinear transformation
 
 - 变换前: $\mathbf{x} = (x_0,x_1,...,x_d)$ , $d_{vc} = d + 1$
 - 变换后: $\mathbf{z} = (z_1,z_2,...,z_{\tilde d})$ ,  $d_{vc} \leq \tilde d + 1$
@@ -321,7 +320,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497245036842_image.png)
 
 
-**logistic regression**
+### logistic regression
 
 - 相比 sign 函数的 hard threshold, logistic function 提供了 soft threshold (reflects uncertainty). 
 - probability interpretation
@@ -337,7 +336,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - algorithm: gradient descent. 忽略高阶项.
   - **learning rate = (step size) / (norm of gradient)**
 
-**misc**
+### misc
 
 - 为什么不用二阶优化方法: 单步计算代价增大, 得不偿失.
 - conjugate gradient?
@@ -346,12 +345,12 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec10 Neural Networks
 
-**SGD**
+### SGD
 
 - SGD 带来的随机性有助于避开局部最小值
 - rule of thumb: 学习率取 0.1
 
-**neural network model**
+### neural network model
 
 - 多层感知机的优化很困难. 神经网络则把其中的 hard threshold 换成 soft threshold, 平滑可微, 更易求解.
 - notations
@@ -363,7 +362,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497683136938_image.png)
 
 
-**BP algorithm**
+### BP algorithm
 
 - 讲 BP 时顺带提到了 FFT. 这两个算法的优点不在于能解决问题, 而在于高效地解决问题.
 - 实施 SGD
@@ -404,7 +403,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - lec 11-13 都是围绕这一主题. 对付过拟合的两大武器: regularization + validation
 - 这里提到了 target function 的复杂度和 target distribution 的噪音, 需要注意, 实际中这些关于 target 的信息都是无从获得的. 这种分析相当于站在上帝视角带着你理解一些概念.
 
-**what is overfitting**
+### what is overfitting
 
 - overfitting: 指 fitting the data (即降低 E_in) 已无助于改进 E_out.
   - 典型场景: 较复杂的模型把多余的自由度拿来学习噪音了.
@@ -414,7 +413,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
     - overfitting 经常伴随泛化能力下降. 但有时不然, 比如例2中的 overfitting 发生在同一个模型里(或者说发生在一个”过程”里), 不涉及模型选择和泛化能力.
 - 元凶: fitting the noise (stochastic/deterministic)
 
-**the role of noise**
+### the role of noise
 
 - 两个例子:
   - 不同的 target, 15个数据点, 分别用2阶和10阶多项式去拟合. 结果都是2阶的 E_out 表现更好.
@@ -441,7 +440,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497698548158_image.png)
 
 
-**deterministic noise**
+### deterministic noise
 
 - deterministic noise: the part of target $f$ that $\mathcal{H}$ cannot capture.
   - 超出模型(假设空间)的能力范围
@@ -451,17 +450,17 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - 区别于 stochastic noise 的特点: 依赖于 H; 对于给定 x 是确定的.
   - 实际中的机器学习问题, H 和 D 一般是确定的, 因此两种 noise 看不出区别.
 
-**bias-variance-noise 分解**
+### bias-variance-noise 分解
 
-  - 对 $\mathbb{E}_D(E_{out})$ 的分解可新增一项 stochastic noise. 而 bias 其实就是 deterministic noise.
+- 对 $\mathbb{E}_D(E_{out})$ 的分解可新增一项 stochastic noise. 而 bias 其实就是 deterministic noise.
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1497708067874_image.png)
 
-  - 对这三项的理解
+- 对这三项的理解
     - variance 取决于 D 与 H 复杂性 (或信息量?) 的相对关系, D 越小而 H 越复杂时, variance 就越大.
     - bias 反映了 H 能力的局限性. **与 D 无关**.
     - stochastic noise 取决于 target distribution P(y|x). **与 D 和 H 均无关**.
-  - 借助 bias-variance-noise 分解, 理解 **how noise affects performance** (书 P125)
+- 借助 bias-variance-noise 分解, 理解 **how noise affects performance** (书 P125)
     - bias 和 $\sigma^2$ 项反映了两种 noise 对 cost 的**直接**影响
       - 只要 H 确定, 不管是 overfit 还是 underfit 情况, 这两项 cost 都是恒定的, 与D无关.
       - underfit 情况下 bias 可能在整个 cost 中占主导.
@@ -470,13 +469,13 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
       - **overfit 情况下这一项主导**. 反之, 当 N 很大时，var 趋于0，也就不存在 overfit.
       - noise 越大, overfit 的可能性越大. 极端情况下, 如果数据是纯粹的 noise, 那么无论怎么拟合都是过拟合.
     - 所谓 “noise 引起 overfitting”, 可以更准确地表达为: 当 H 有多余自由度时, noise 会诱发模型跑偏, 增大 variance, 发生过拟合. (当 H 足够简单时, 模型都不具有”跑偏”的能力)
-  - 注意1: 分解的对象是对 D 和 x 取了期望的 E_out. 分解结果中, 只有第一项 variance 还与 D 有关; 而三项都包含 对 x 的期望, 反映在输入空间上的总体规律, 而非针对具体数据点.
+- 注意1: 分解的对象是对 D 和 x 取了期望的 E_out. 分解结果中, 只有第一项 variance 还与 D 有关; 而三项都包含 对 x 的期望, 反映在输入空间上的总体规律, 而非针对具体数据点.
   - 注意2: 这个分解也是上帝视角. 面对实际问题时, 模型无法区分 signal 和 noise, 只要有多余的自由度, 就会不自觉地去拟合 noise.
   - overfitting 与 bias-variance tradeoff
     - 选择较复杂的 H 可以降低 bias (deterministic noise), 因为 H 的复杂度与 target 更接近了.
     - 但在数据量不足时, 复杂模型会用多余的自由度会去学习噪音, 结果造成 variance 很大. 而 variance 的增大很容易就会抵消 bias 的减少, 因而总的 cost 会增大, 也就是发生了过拟合.
 
-**小结**
+### 小结
 
 - overfitting 是指降低 E_in 无助于降低 E_out. 诱因是 noise. 发生的条件是模型 capacity 富余或数据不足.
 - stochastic/deterministic noise. 前者与H无关, 后者与H有关. 但实践中两种 noise 表现相似.
@@ -485,7 +484,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec12 Regularization
 
-**regularization**
+### regularization
 
 - mathematical approach and heuristic approach
   - 数学方法所需的假定, 实际中经常难以满足. 但从中得到的 intuition 可用于指导 heuristic 方法.
@@ -501,7 +500,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - **regularizer 的选择一般用 heuristic 方法.** $\lambda$ **的选择则基于 validation.**
 - noise 越多, 需要的正则化系数越大
 
-**weight decay**
+### weight decay
 
 - 对 $E_{in}(w) + \frac{\lambda}{N}w^Tw$ 的最小化, 就叫 weight decay. 这是最常见的一种 regularizer.
 - 为啥叫 weight decay? 在梯度下降求解时:
@@ -524,7 +523,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
     - $\Omega(H)$ 与 $\Omega(h)$ 的联系见 Lec17.
   - E_aug is better than E_in as a proxy for E_out
 
-**choosing a regularizer**
+### choosing a regularizer
 
 - guiding principle: direction of **smoother or simpler**
   - 比如 netflix 用户评分预测的例子: 采用了使预测趋于平均值的正则化
@@ -537,7 +536,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
       - 小的参数更趋于 0 (softly eliminated), 大的参数不受影响.
 - early stopping 也是一种 regularizer
 
-**misc**
+### misc
 
 - 区分三种 regularizer
   - weight decay 中使模型偏向 low-order fit 或 high-order fit
@@ -551,7 +550,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec13 Validation
 
-**The validation set**
+### The validation set
 
 - validation vs. regularization
   - 都在试图优化 E_out. E_out = E_in + overfit penalty
@@ -570,7 +569,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 - rule of thumb: K = N/5
 
-**Model selection**
+### Model selection
 
 - “validation” 的含义: 利用这部分数据来做选择
 - 做了选择之后, E_val 不再是 E_out 的无偏估计, 会有一个 optimistic bias
@@ -594,7 +593,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - test set: 完全纯净
 - validation 作为一种选择模型的方法, 优点是基本不需要什么假定.
 
-**Cross validation**
+### Cross validation
 
 - the dilemma about K
   - 用 E_val 准确估计 E_out, 需要做好下图的两个环节
@@ -622,7 +621,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 统计学习方法 讲得更细. 笔记见 +ml_LiHangBook_lim: Ch7-SVM
 
-**Maximizing the margin**
+### Maximizing the margin
 
 - 要求 fat margin 意味着假设空间缩小, d_vc 变小
 - 点 x_n 到超平面 $w^Tx + b = 0$ 的距离
@@ -630,7 +629,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - “间隔最大” 等于以下优化问题: 最大化 1/||w|| , 满足 $\min_n |w^Tx_n + b| = 1$
 - 转化为更易求解的形式: 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
 
-**The solution**
+### The solution
 
 - 求解比较复杂. 需要用到 QP 的知识.
 - 与前面的 regularization 有点类似. 有趣的是 regularization 是约束 $w^Tw$ 优化 E_in, 而 SVM 刚好反过来.
@@ -650,7 +649,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - $\alpha_n$ 可以看做是模型的参数. 因为仅对 support vector 才有 $\alpha_n > 0$, 大部分 $\alpha_n = 0$. 所以 $w = \sum_{x_n\text{ is SV}} a_ny_nx_n$
   - “有效”参数的个数大大减少了. 有助于泛化能力.
 
-**Nonlinear transforms**
+### Nonlinear transforms
 
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498192408312_image.png)
@@ -673,7 +672,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec15 Kernel methods
 
-**The kernel trick**
+### The kernel trick
 
 - Kernel 是一种 generalized inner product.
   - 首先从上一讲最后 SVM 的非线性变换引入. 
@@ -698,7 +697,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
       - 对称 and 矩阵 [K(x_i, x_j)] 是半正定的
   - 有些人不管 Z 存在与否, 找一个 Kernel 就开始动手. 这样做在理论上站不住脚, 但有时候也 work.
 
-**Soft-margin SVM**
+### Soft-margin SVM
 
 - 参 +ml_LiHangBook_lim: 7.2-线性支持向量机与软间隔最大化 
 - 硬间隔 → 软间隔
@@ -712,7 +711,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - non-margin SVs. $( \alpha_n = C )$
 - C 的确定: 依靠 validation
 
-**Misc**
+### Misc
 
 - 计算的瓶颈在 quadratic programming
 
@@ -721,7 +720,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - 这一讲把 RBF 与机器学习里的很多内容联系起来了(近邻法, 神经网络, SVM, 正则化, 聚类). 值得重温.
 - RBF 本身也是一类模型. 跟采用 RBF kernel 的 SVM 是两回事.
 
- 
+
 [**Radial basis function - Wikipedia**](https://en.wikipedia.org/wiki/Radial_basis_function)
 - 一般定义: a real-valued function whose value depends only on the distance from the origin, so that $\phi(x) = \phi(||x||)$
 - **常用 sums of radial basis function 来拟合函数**
@@ -733,7 +732,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - Inverse quadratic $\phi(r) = \frac{1}{1+(\epsilon r)^2}$
   - …
 
-**Basic RBF model**
+### Basic RBF model
 
 - 模型
   - Each $(x_n, y_n) \in D$ influnces h(x) **based on ||x - x_n||**  → 这就是所谓 **radial**
@@ -751,7 +750,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 - 以上是 Basic RBF 用于 regression 时的形式. 当用于分类时可以取 sign.
 
-**RBF and nearest neighbors**
+### RBF and nearest neighbors
 
 - 二者的共同点: 基于相似性
 - 近邻法: 
@@ -761,7 +760,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - 最不平滑的情形: basis function 取为圆柱体(假设 X 为二维), 即, 在某半径范围内该点贡献为定值, 在该半径外贡献为0.
   - 平滑化: 高斯 RBF.
 
-**RBF with K centers**
+### RBF with K centers
 
 - 解决前面 Basic RBF model 参数数量过多的问题: use K << N centers: $\mu_1,...\mu_K$ instead of $x_1,...,x_N$. (由于求平均, centers 一般不是数据集里的点)
 - $h(x) = \sum_{k=1}^K w_k \exp (-\gamma||x-\mu_k||^2)$
@@ -783,7 +782,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499739703178_image.png)
 
 
-**RBF network vs. two-layer neural network**
+### RBF network vs. two-layer neural network
 
 - 相似处: 都是 input → features → output (combinations of features). 
   - RBF 函数如同隐层的激活函数.
@@ -794,8 +793,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499743473790_image.png)
 
-
-**choosing** $\gamma$
+### choosing $\gamma$
 
 - 前面由 clustering 方法得到了 $\mu_k$ , 现在真正需要确定的参数是 $w_k$ 和 $\gamma$
 - 如果用梯度下降等方法同时求 $w_k$ 和 $\gamma$, 就浪费了可以直接用 psuedo-inverse 求解 $w_k$ 的便利性.
@@ -804,7 +802,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - 这就是 **EM algorithm** in mixture of Gaussians
 - 可以对不同的 center $\mu_k$ 选用不同的 $\gamma_k$ , 这样 $\gamma$ 从单个参数变为一个参数向量
 
-**RBF and SVM/kernel methods**
+### RBF and SVM/kernel methods
 
 - 二者都使用了 RBF 函数. 
 - 二者都是以少数点 (相对于样本数 N) 为”核心”建立起来的: RBF 模型由 clustering 得到少数 centers, SVM 则基于少量的 support vectors. 
@@ -816,7 +814,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 - 给了一个例子, 采用 RBF kernel 的 SVM 表现比 regular RBF 好. (普遍来说 SVM 的性能更好, 除非输入有明显的 clusters)
 
-**RBF and regularization**
+### RBF and regularization
 
 - [function approximation](https://en.wikipedia.org/wiki/Function_approximation) vs. machine learning: 机器学习在某种意义上就是一种 function approximation.
 - RBF 完全可以基于 regularization 推导得出 → 反映了 RBF 本身固有的优良特性.
@@ -827,7 +825,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 ## Lec17 Three Learning Principles
 - Occam’s razor 关乎模型选择. sampling bias 关乎数据的获取. data snooping 关乎数据的使用.
 
-**Occam’s razor**
+### Occam’s razor
 
 - a famous quote: “An explanation of the data should be made as simple as possible, but no simpler"
 - **Occam’s razor: “The simplest model that fits the data is also the most plausible.”**
@@ -856,7 +854,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
     - => 准确拟合的意义更重大
   - axiom of non-falsifiability: 要想使数据证实一个 hypothesis, 那么数据需要有证伪 hypothesis 的可能性.
 
-**sampling bias**
+### sampling bias
 
 - **If the data is sampled in a biased way, learning will pro­duce a similarly biased outcome.**
 - 例子
@@ -868,7 +866,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - 对某些 sampling bias, 可以通过对训练数据的处理, 让其分布匹配 test data.
   - 但也有一些 sampling bias 是无法解决的, 比如 当输入空间中的某些区域 (如美国大选例子中 没装电话的人口) 在训练集上 P = 0 而在测试集上 P>0 时. 
 
-**data snooping**
+### data snooping
 
 - **If a data set has affected any step in the learning process, its ability to assess the outcome has been compromised.**
 - data snooping 是机器学习中最常见的陷阱.
@@ -898,7 +896,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - 描绘机器学习地图.
 - 简单介绍进一步学习的两个重要方向: 贝叶斯学习, aggregation.
 
-**The map of machine learning** 
+### The map of machine learning*
 
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499916064245_image.png)
@@ -912,7 +910,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - VC 是一套很有价值的理论, 从中获得的 insights 能指导实践. bias-variance 提供了另一种角度.
   - 本课程没讲到的两大块理论: complexity - 从计算复杂度角度理解机器学习. bayesian - 把机器学习看做一个概率问题, 关注联合概率分布.
 
-**Bayesian learning**
+### Bayesian learning
 
 - $P(D|h=f)$ vs. $P(h=f|D)$
   - $P(D|h=f)$: 给定 D 时, 就等于 f 的 likelihood $L(h=f|D) = P(D|h=f)$
@@ -927,7 +925,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
   - the prior is irrelevant. 随着数据量的增大, 结果受先验概率假定的影响可能越来越小. 这时可以把先验概率看做一种 computational catalyst, 仅为了计算的方便.
 - 待补充阅读: +ml_DLbookCh5_mlbasics_lim: 5.6-Bayesian-Statistics 
 
-**Aggregation methods**
+### Aggregation methods
 
 - aggregation 代表了一大类方法. 是把不同模型得到的 solutions 组合起来.
   - 回归问题可求平均, 分类问题可以投票
@@ -941,6 +939,6 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - blending - after the fact
   - 以回归问题为例. 可以把不同 solution 线性组合. $g(\mathbf{x}) = \sum_{t=1}^T\alpha_t h_t(\mathbf{x})$
   - 有些组合系数可能为负. 这不代表相应的 solution 没有价值, 而可能是因为与其他某些 solution 比较相似.
-  - #quiz 如何衡量某种 solution 在其中的贡献?
+  - quiz: 如何衡量某种 solution 在其中的贡献?
 
 
