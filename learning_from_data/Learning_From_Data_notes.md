@@ -166,8 +166,8 @@
 
 - $P[|E_{in} - E_{out}| > \epsilon] \leq 2Me^{-2\epsilon^2N}$
   - M 是为利用/污染了训练数据而付出的代价
-  - M 怎么来的: 概率取了 union bound, 忽略了不同事件的重叠部分.
-    - $P[B_1 or B_2 or ... or B_M] \leq P[B_1] + P[B_2] + ... + P[B_M]$  (B for Bad thing)
+  - M 怎么来的: 概率取了 union bound, 忽略了不同事件的重叠部分. 取得太保守了.
+    - $P[B_1\ or\ B_2\ or\ …\ or\ B_M] \leq P[B_1] + P[B_2] + ... + P[B_M]$  (B = Bad thing)
   - 需要从 H 中抽象出一个能考虑 overlap 的量 → break point
 - dichotomies  (mini-hypotheses)
   - a hypothesis: $h: \mathcal{X} \rightarrow \{-1,+1\}$. 数量可以是无穷大.
@@ -206,13 +206,13 @@
 
 ## Lec6 Theory of generalization
 
-### Proof that** $m_H(N)$ **is polynomial
+### Proof that $m_H(N)$ is polynomial
 
 - $B(N,k)$ : maximum number of dichotomies on N points, with break point k. 不限定 H, 故 $m_H(N) \leq B(N,k)$.
 - 用递归的方法找 $B(N,k)$ 的上界: $B(N,k) \leq \sum_{i=0}^{k-1} {N \choose i}$
 - 所以 $m_H(N) \leq \sum_{i=0}^{k-1} {N \choose i}$ , max power is $N^{k-1}$
 
-### Proof that** $m_H(N)$ **can replace M
+### Proof that $m_H(N)$ can replace M
 
 - 结合 **Textbook 2.1.4 The VC generalization bound**
 - 证明过程较复杂, 忽略.
@@ -896,7 +896,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 - 描绘机器学习地图.
 - 简单介绍进一步学习的两个重要方向: 贝叶斯学习, aggregation.
 
-### The map of machine learning*
+### The map of machine learning
 
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1499916064245_image.png)
