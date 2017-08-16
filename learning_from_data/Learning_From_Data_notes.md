@@ -129,7 +129,7 @@
 - **也叫 error function / cost / objective / risk**
 - to quantify how well h approximates f
 - $E_{in}(h) = 1/N \sum_{n=1}^N e(h(x_n), f(x_n))$
-- $E_{out}(h) = \mathbb{E}_x [e(h(x), f(x)]$ (期望)
+- $E_{out}(h) = \mathbb{E}_x [e(h(x), f(x))]$ (期望)
 - 理想情况下, **error measure should be user-specified**
   - 如二分类问题, TN 和 FP 的权重随场景而不同
 - 但实际中, 难得有这种理想的 error measure. 原因一是用户本身无法提供, 二是 weighted cost 可能不容易优化. 这时可以按 analytic 或 practical 的原则来选择:
@@ -138,9 +138,9 @@
 
 ### Noisy targets
 
-- 学习的目标一般情况下并不是 deterministic function, 而是一个概率分布 $P(y|x)$.
+- 学习的目标一般情况下并不是 deterministic function, 而是一个概率分布 $P(y|x)​$.
 - noisy target = [deterministic target $f(x) = E(y|x)$] + [noise $y-f(x)$]
-- 考虑噪音, 则 $y=f(x)$ → $y \sim P(y|x)$ , $E_{out}(h)$ → $\mathbb{E}_{x,y} [e(h(x), y]$
+- 考虑噪音, 则 $y=f(x)$ → $y \sim P(y|x)$ , $E_{out}(h)$ → $\mathbb{E}_{x,y} [e(h(x), y)]$
 - 加入 error measure 和 noisy targets 后的 learning diagram:
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496375358080_image.png)
