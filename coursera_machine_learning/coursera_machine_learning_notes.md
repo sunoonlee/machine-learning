@@ -56,14 +56,14 @@ Coursera Machine Learning 课程笔记
 
 ## w3 Logistic regression + regularization
 - logistic regression
-  - cost function 与梯度更新公式
+  - cost function 与参数更新公式
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501909230031_image.png)
 
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501909289680_image.png)
 
-  - 向量化:
+- 向量化:
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501909308595_image.png)
 
@@ -87,7 +87,7 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501915324317_image.png)
 
-  - 把各层激活前的值向量记做 $z^{(j)}$, 则 $z^{(j)} = \Theta^{(j-1)} a^{(j-1)}$ , $a^{(j)} = g(z^{(j)})$
+- 把各层激活前的值向量记做 $z^{(j)}$, 则 $z^{(j)} = \Theta^{(j-1)} a^{(j-1)}$ , $a^{(j)} = g(z^{(j)})$
 - octave tips
   - [匿名函数](https://www.gnu.org/software/octave/doc/interpreter/Anonymous-Functions.html#Anonymous-Functions)
   - logical arrays: `y == c`
@@ -112,11 +112,11 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501916822641_image.png)
 
-  - 利用 $\delta$ 更新 $\Delta$ 矩阵 
+- 利用 $\delta$ 更新 $\Delta$ 矩阵 
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501916865910_image.png)
 
-  - 以上三步对所有样本循环
+- 以上三步对所有样本循环
   - 最后根据 $\Delta$ 矩阵得到梯度 D 矩阵
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501916961555_image.png)
@@ -175,7 +175,7 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501137885979_image.png)
 
-  - 比较单个数据点的 cost
+- 比较单个数据点的 cost
     - 逻辑回归: 正/负例点分别为 $\log h(x^{(i)})$, $1-\log h(x^{(i)})$. 其中 $h(x) = \sigma(\theta^Tx)$
     - SVM: 把上面两个曲线替换为折线, 也就是“合页损失函数”. 计算代价会变小.
 
@@ -279,7 +279,7 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501222858150_image.png)
 
-  - 控制这个比例: (average squared projection error) / (total variance in the data)
+- 控制这个比例: (average squared projection error) / (total variance in the data)
   - 常见限值是 1%~5%. 有时也会用到 10%-15%.
   - 可以利用 SVD 分解得到的对角矩阵 S. 选择满足下式的最小的 k: $\frac{\sum_{i=1}^k S_{ii}} {\sum_{i=1}^m S_{ii}} \geq 0.99$
 
@@ -312,7 +312,7 @@ Coursera Machine Learning 课程笔记
 1. 二维数据上的 K-means
   - move centroid: 
     - `for k = 1:K`
-    -   `centroids(k, : ) = mean(X(find(idx == k), : ));`
+    - `centroids(k, : ) = mean(X(find(idx == k), : ));`
 2. 用 K-means 把图片压缩成 16 色
   - Octave 读入图片时 得到一个 rank-3 的矩阵. 三个维度分别为: 行, 列, RGB. 
     - 每个像素的单色强度分别用一个 8-bit 整数表示. 对 128x128 像素图片, 矩阵形状为 128x128x3.
@@ -353,14 +353,16 @@ Coursera Machine Learning 课程笔记
 ### Building an anomoly detection system
 
 - developing and evaluating an anomaly detection system
-### **  - anomaly detection 是一个无监督学习算法. 但为了评估算法表现, 需要少量标记数
-  - 训练/CV/测试集划分
+- anomaly detection 是一个无监督学习算法. 但为了评估算法表现, 需要少量标记数据
+
+
+- 训练/CV/测试集划分
     - 一般会有大量的”正常”数据, 另外需要少量”反常”数据 (比如 20-50个)
     - 假设 10000 个正常数据, 20 个反常数据. 可划分如下:
       - 训练集: 6000 个正常数据 (可以允许混入少量反常数据).
       - 交叉验证集: 2000 正常, 10 反常
       - 测试集: 2000 正常, 10 反常
-  - 训练: 无监督学习, 不需要 label
+- 训练: 无监督学习, 不需要 label
   - 交叉验证/测试: 
     - 需要 label 来评估模型, 使用 presision/recall/f1-score 等指标. 
     - 交叉验证集可用来决定特征的选取, 超参数 $\epsilon$ 的取值等
@@ -375,7 +377,7 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501320374474_image.png)
 
-  - 依靠 error analysis 来增加新的特征
+- 依靠 error analysis 来增加新的特征
     - 当现有算法无法识别某些异常点时, 试试引入什么新的特征可以把这些点区分开来.
 
 ### Multivariate Gaussian Distribution
@@ -430,11 +432,11 @@ Coursera Machine Learning 课程笔记
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501816737931_Screenshot+2017-08-04+11.17.32.png)
 
-  - 梯度计算
+- 梯度计算
 
 ![](https://d2mxuefqeaa7sj.cloudfront.net/s_C71F128EC1AD0AA0CC664FF1B2FF7C9CC5A870050A4FC3E2D26DBB5320946F3D_1501839327267_image.png)
 
-  - 其实跟线性回归很像. 区别: square error 没有求平均; 求和的范围是 r(i,j) = 1 的样本.
+- 其实跟线性回归很像. 区别: square error 没有求平均; 求和的范围是 r(i,j) = 1 的样本.
 - 作业里的例子
   - 求梯度的向量化语句写起来比较 tricky. 以 x 的梯度为例:
      for i = 1:num_movies
