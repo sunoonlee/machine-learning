@@ -1,10 +1,92 @@
-# ml_LearningFromData_lim
+# Learning From Data notes
 
-[TOC]
-
-- Course materials: [Lectures](https://work.caltech.edu/lectures.html)  |  [Homeworks](https://work.caltech.edu/homeworks.html)
+- course materials: [Lectures](https://work.caltech.edu/lectures.html)  |  [Homeworks](https://work.caltech.edu/homeworks.html)
 - 部分 Homework 解答和笔记: [homeworks.ipynb](https://github.com/sunoonlee/machine-learning/blob/master/learning_from_data/Homeworks.ipynb)
 - 推荐安装 chrome 插件 [GitHub with MathJax](https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima), 支持 Github 上的 LaTeX 公式渲染.
+
+<!-- toc -->
+
+- [Lec 1 The Learning problem](#lec-1-the-learning-problem)
+  * [components of learning](#components-of-learning)
+  * [a simple model: perceptron](#a-simple-model-perceptron)
+  * [types of learning](#types-of-learning)
+  * [misc](#misc)
+- [Lec2 Is Learning Feasible?](#lec2-is-learning-feasible)
+  * [probability to the rescue 概率拯救”学习”](#probability-to-the-rescue-%E6%A6%82%E7%8E%87%E6%8B%AF%E6%95%91%E5%AD%A6%E4%B9%A0)
+  * [connection to learning](#connection-to-learning)
+  * [notes](#notes)
+- [Lec3 The Linear Model I](#lec3-the-linear-model-i)
+  * [input representation](#input-representation)
+  * [Linear classification](#linear-classification)
+  * [Linear regression](#linear-regression)
+  * [nonlinear transformation](#nonlinear-transformation)
+- [Lec4 Error and Noise](#lec4-error-and-noise)
+  * [Error measures](#error-measures)
+  * [Noisy targets](#noisy-targets)
+  * [接下来 12 个 lecture 要下一盘很大的棋](#%E6%8E%A5%E4%B8%8B%E6%9D%A5-12-%E4%B8%AA-lecture-%E8%A6%81%E4%B8%8B%E4%B8%80%E7%9B%98%E5%BE%88%E5%A4%A7%E7%9A%84%E6%A3%8B)
+- [Lec5 Training versus Testing](#lec5-training-versus-testing)
+  * [解决 M 无穷大的问题](#%E8%A7%A3%E5%86%B3-m-%E6%97%A0%E7%A9%B7%E5%A4%A7%E7%9A%84%E9%97%AE%E9%A2%98)
+  * [examples (growth functions)](#examples-growth-functions)
+  * [break point](#break-point)
+- [Lec6 Theory of generalization](#lec6-theory-of-generalization)
+  * [Proof that $m_H(N)$ is polynomial](#proof-that-m_hn-is-polynomial)
+  * [Proof that $m_H(N)$ can replace M](#proof-that-m_hn-can-replace-m)
+- [Lec7 The VC dimension](#lec7-the-vc-dimension)
+  * [The VC dimension](#the-vc-dimension)
+  * [Interpreting](#interpreting)
+  * [Generalization bounds](#generalization-bounds)
+- [Lec8 Bias-Variance tradeoff](#lec8-bias-variance-tradeoff)
+  * [Bias and Variance](#bias-and-variance)
+  * [Learning Curve](#learning-curve)
+- [Lec9 The linear model II](#lec9-the-linear-model-ii)
+  * [generalization in nonlinear transformation](#generalization-in-nonlinear-transformation)
+  * [logistic regression](#logistic-regression)
+  * [misc](#misc-1)
+- [Lec10 Neural Networks](#lec10-neural-networks)
+  * [SGD](#sgd)
+  * [neural network model](#neural-network-model)
+  * [BP algorithm](#bp-algorithm)
+- [Lec11 Overfitting](#lec11-overfitting)
+  * [what is overfitting](#what-is-overfitting)
+  * [the role of noise](#the-role-of-noise)
+  * [deterministic noise](#deterministic-noise)
+  * [bias-variance-noise 分解](#bias-variance-noise-%E5%88%86%E8%A7%A3)
+  * [小结](#%E5%B0%8F%E7%BB%93)
+- [Lec12 Regularization](#lec12-regularization)
+  * [regularization](#regularization)
+  * [weight decay](#weight-decay)
+  * [choosing a regularizer](#choosing-a-regularizer)
+  * [misc](#misc-2)
+- [Lec13 Validation](#lec13-validation)
+  * [The validation set](#the-validation-set)
+  * [Model selection](#model-selection)
+  * [Cross validation](#cross-validation)
+- [Lec14 SVM](#lec14-svm)
+  * [Maximizing the margin](#maximizing-the-margin)
+  * [The solution](#the-solution)
+  * [Nonlinear transforms](#nonlinear-transforms)
+- [Lec15 Kernel methods](#lec15-kernel-methods)
+  * [The kernel trick](#the-kernel-trick)
+  * [Soft-margin SVM](#soft-margin-svm)
+  * [Misc](#misc)
+- [Lec16 Radial Basis Functions](#lec16-radial-basis-functions)
+  * [Basic RBF model](#basic-rbf-model)
+  * [RBF and nearest neighbors](#rbf-and-nearest-neighbors)
+  * [RBF with K centers](#rbf-with-k-centers)
+  * [RBF network vs. two-layer neural network](#rbf-network-vs-two-layer-neural-network)
+  * [choosing $\gamma$](#choosing-gamma)
+  * [RBF and SVM/kernel methods](#rbf-and-svmkernel-methods)
+  * [RBF and regularization](#rbf-and-regularization)
+- [Lec17 Three Learning Principles](#lec17-three-learning-principles)
+  * [Occam’s razor](#occams-razor)
+  * [sampling bias](#sampling-bias)
+  * [data snooping](#data-snooping)
+- [Lec18 Epilogue](#lec18-epilogue)
+  * [The map of machine learning](#the-map-of-machine-learning)
+  * [Bayesian learning](#bayesian-learning)
+  * [Aggregation methods](#aggregation-methods)
+
+<!-- tocstop -->
 
 ## Lec 1 The Learning problem
 
@@ -191,7 +273,6 @@
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_FA9189E64E3F201143EF4ED387BEEA610619552CD2E7E2AA295C880EFD385019_1496474799988_image.png)
 
-
 ### break point
 
 - 定义
@@ -258,10 +339,10 @@
 
 ## Lec8 Bias-Variance tradeoff
 
-lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalization tradeoff
-
-- Lec5~7 以二分类的 binary error 为例, 分析方法是 VC analysis, 结果是 $E_{out} \leq E_{in} + \Omega$
-- Lec8 以 squared error measures 为例, 分析方法是 bias-variance analysis. 结果是将 $E_{out}$ 分解为 bias + variance.
+* lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalization tradeoff
+  * Lec5~7 以二分类的 binary error 为例, 分析方法是 VC analysis, 结果是 $E_{out} \leq E_{in} + \Omega$
+  * Lec8 以 squared error measures 为例, 分析方法是 bias-variance analysis. 结果是将 $E_{out}$ 分解为 bias + variance.
+* 这里引入了一个"虚拟"的过程: data generating process. bias 代表消除了该过程随机性之后的那部分 E_out, 反映算法本身的拟合能力; 而 variance 代表由该过程随机性 (或者说, 数据扰动) 造成的那部分 E_out.
 
 ### Bias and Variance
 
@@ -619,15 +700,18 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ## Lec14 SVM
 
-统计学习方法 讲得更细. 笔记见 +ml_LiHangBook_lim: Ch7-SVM
+统计学习方法 ch7 讲得比较详细.
 
 ### Maximizing the margin
 
-- 要求 fat margin 意味着假设空间缩小, d_vc 变小
-- 点 x_n 到超平面 $w^Tx + b = 0$ 的距离
-  - 先 normalize w, 使 $|w^Tx_n + b| = 1$. 则距离 = 1/||w||
-- “间隔最大” 等于以下优化问题: 最大化 1/||w|| , 满足 $\min_n |w^Tx_n + b| = 1$
-- 转化为更易求解的形式: 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
+- fat margin 的限定可以减少 dichotomies 数量, 即减小 d_vc
+- 点 x_n 到超平面 $w^Tx + b = 0$ 的距离 $\frac{1}{||w||} |w^Tx_n + b|$
+- “间隔最大”: 使 $\min_n \frac{1}{||w||} |w^Tx_n + b|$ 最大
+- 等价于: 最大化 1/||w|| , 满足 $\min_n |w^Tx_n + b| = 1$
+- 关于条件 $\min_n |w^Tx_n + b| = 1$:
+  - 相当于把系数 w 和 b 在离分界面最近的点上 normalize
+  - 为什么是1? 可以取任意值 c, 最终得到的 w 和 b 按比例变化, 分界面 wx+b=0 不变. 取1最简单.
+- 等价于: 最小化 $w^Tw/2$ , 满足 $y_n(w^Tx_n + b) \geq 1$ for n=1,2,…N
 
 ### The solution
 
@@ -646,7 +730,7 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ![img](https://d2mxuefqeaa7sj.cloudfront.net/s_EB6E580B0B6ABFCDC87F08E8E963535A27D1C04D2C2D29F372803D92C91B7248_1498191678804_image.png)
 
-- $\alpha_n$ 可以看做是模型的参数. 因为仅对 support vector 才有 $\alpha_n > 0$, 大部分 $\alpha_n = 0$. 所以 $w = \sum_{x_n\text{ is SV}} a_ny_nx_n$
+- $\alpha_n$ 可以看做是模型的参数. 因为仅对 support vector 才有 $\alpha_n > 0$, 大部分 $\alpha_n = 0$. 所以 $w = \sum_{x_n\text{ is SV}} \alpha_ny_nx_n$
   - “有效”参数的个数大大减少了. 有助于泛化能力.
 
 ### Nonlinear transforms
@@ -699,7 +783,6 @@ lec 5-8 都是关于 generalization 问题, 或者说 approximation-generalizati
 
 ### Soft-margin SVM
 
-- 参 +ml_LiHangBook_lim: 7.2-线性支持向量机与软间隔最大化 
 - 硬间隔 → 软间隔
   - 目标函数: 在 $\frac{1}{2} w^Tw$ 基础上增加一项对误分类的惩罚 $C\sum_{n=1}^N\xi_n$
   - 神奇的是, 最终交给 QP 的优化目标 $L(\alpha)$ 是基本相同的, 唯一区别是增加了约束 $\alpha_n \leq C$

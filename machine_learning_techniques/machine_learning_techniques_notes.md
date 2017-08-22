@@ -4,8 +4,42 @@
 - 三大部分
   - Lec1~6 embedding numerous features: kernel models. 主要讲 SVM
   - Lec7~11 **combining predictive features: aggregation models ← 暂时只学习这部分**
-- lec12~15 distilling hidden features: extraction models. 深度学习, rbf网络, 矩阵分解
+  - lec12~15 distilling hidden features: extraction models. 深度学习, rbf网络, 矩阵分解
   - Lec16 happy learning
+
+<!-- toc -->
+
+- [combining predictive features](#combining-predictive-features)
+  * [Lec7 blending and bagging](#lec7-blending-and-bagging)
+    + [motivation of aggregation](#motivation-of-aggregation)
+    + [uniform blending](#uniform-blending)
+    + [Linear and any blending](#linear-and-any-blending)
+    + [bagging (bootstrap aggregation)](#bagging-bootstrap-aggregation)
+    + [summary](#summary)
+  * [Lec8 Adaptive boosting](#lec8-adaptive-boosting)
+    + [motivation of boosting](#motivation-of-boosting)
+    + [diversity by re-weighting](#diversity-by-re-weighting)
+    + [Adaptive boosting algorithm](#adaptive-boosting-algorithm)
+    + [AdaBoost in action](#adaboost-in-action)
+    + [补充一点集成学习基本知识 (西瓜书 ch8)](#%E8%A1%A5%E5%85%85%E4%B8%80%E7%82%B9%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86-%E8%A5%BF%E7%93%9C%E4%B9%A6-ch8)
+  * [Lec9 Decision tree](#lec9-decision-tree)
+    + [decision tree hypothesis](#decision-tree-hypothesis)
+    + [decision tree algorithm](#decision-tree-algorithm)
+    + [desicion tree heuristics in C&RT](#desicion-tree-heuristics-in-crt)
+    + [decision tree in action](#decision-tree-in-action)
+  * [Lec10 Random forest](#lec10-random-forest)
+    + [random forest algorithm](#random-forest-algorithm)
+    + [out-of-bag estimate](#out-of-bag-estimate)
+    + [feature selection](#feature-selection)
+    + [random forest in action](#random-forest-in-action)
+  * [Lec11 GBDT](#lec11-gbdt)
+    + [adaptive boosted decision tree](#adaptive-boosted-decision-tree)
+    + [optimization view of AdaBoost](#optimization-view-of-adaboost)
+    + [Gradient boosting](#gradient-boosting)
+    + [summary of aggregation models](#summary-of-aggregation-models)
+
+<!-- tocstop -->
+
 # combining predictive features
 - blending and bagging
 - adaptive boosting

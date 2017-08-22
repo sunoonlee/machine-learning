@@ -1,6 +1,53 @@
 Coursera Machine Learning 课程笔记
+
 - 课程页面: https://www.coursera.org/learn/machine-learning
 - 网上一份很详细的笔记 → http://www.holehouse.org/mlclass/
+
+<!-- toc -->
+
+- [w1 intro + 单变量线性回归 + 线代回顾](#w1-intro--%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92--%E7%BA%BF%E4%BB%A3%E5%9B%9E%E9%A1%BE)
+- [w2 多变量线性回归 + octave](#w2-%E5%A4%9A%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92--octave)
+  * [数学记法](#%E6%95%B0%E5%AD%A6%E8%AE%B0%E6%B3%95)
+  * [Gradient descent in practice](#gradient-descent-in-practice)
+  * [normal equation](#normal-equation)
+  * [作业: 线性回归的梯度下降法](#%E4%BD%9C%E4%B8%9A-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95)
+- [w3 Logistic regression + regularization](#w3-logistic-regression--regularization)
+- [w4 neural networks: representation](#w4-neural-networks-representation)
+- [w5 neural networks: learning](#w5-neural-networks-learning)
+- [w6 advice for applying machine learning](#w6-advice-for-applying-machine-learning)
+- [w7 SVM](#w7-svm)
+  * [Large Margin Classification](#large-margin-classification)
+  * [Kernels](#kernels)
+  * [SVMs in Practice](#svms-in-practice)
+  * [Assignment (ex6)](#assignment-ex6)
+- [w8 Clustering](#w8-clustering)
+  * [K-means: 最常用的聚类算法](#k-means-%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95)
+- [w8 Dimensionality reduction](#w8-dimensionality-reduction)
+  * [motivation of dimensionality reduction](#motivation-of-dimensionality-reduction)
+  * [PCA](#pca)
+  * [advice for applying PCA](#advice-for-applying-pca)
+- [w8 Assignment (ex7)](#w8-assignment-ex7)
+  * [K-means](#k-means)
+  * [PCA](#pca-1)
+- [w9 Anomaly detection](#w9-anomaly-detection)
+  * [Density estimation](#density-estimation)
+  * [Building an anomoly detection system](#building-an-anomoly-detection-system)
+  * [Multivariate Gaussian Distribution](#multivariate-gaussian-distribution)
+- [w9 Recommender system](#w9-recommender-system)
+  * [引子: content-based recommendations](#%E5%BC%95%E5%AD%90-content-based-recommendations)
+  * [Collaborative filtering](#collaborative-filtering)
+  * [Low rank matrix factorization](#low-rank-matrix-factorization)
+  * [mean normalization](#mean-normalization)
+- [w10 Large Scale Machine Learning](#w10-large-scale-machine-learning)
+  * [SGD 和 mini-batch](#sgd-%E5%92%8C-mini-batch)
+  * [online learning](#online-learning)
+  * [map reduce and data parellelism](#map-reduce-and-data-parellelism)
+- [w11 application example: photo OCR](#w11-application-example-photo-ocr)
+  * [sliding window](#sliding-window)
+  * [artificial data synthesis](#artificial-data-synthesis)
+  * [ceiling analysis](#ceiling-analysis)
+
+<!-- tocstop -->
 
 ## w1 intro + 单变量线性回归 + 线代回顾
 - what is machine learning
@@ -153,6 +200,7 @@ Coursera Machine Learning 课程笔记
 
 
 ## w7 SVM
+
 - 相关笔记
   - LFD +ml_LearningFromData2_lim: Lec14-SVM 
   - 统计学习方法 +ml_LiHangBook_lim: Ch7-SVM 
