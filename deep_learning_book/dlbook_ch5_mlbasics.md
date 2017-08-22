@@ -146,7 +146,7 @@
 ### Point Estimation
 
 - point estimator 定义: data 的任意函数 $\hat{\theta}_m = g(x^{(1)},...x^{(m)})$. 目的是准确预测参数的”真实值”.
-  - 用于估计的 data 是依据某种分布随机生成的, 因此 estimator 是一个**随机变量**
+  - data generating process 造成了 data 的随机性, 而 $\hat{\theta}$ 是 data 的函数, 因而是一个**随机变量**
 - 除了估计参数, 有时直接估计函数: approximate $f$ with $\hat{f}$
 - 最常见的 estimator 就是样本均值
 - 下面介绍 estimator 的两个重要特性: bias, variance
@@ -165,7 +165,7 @@
 
 ### Variance and Standard Error
 
-- $\mathrm{Var}(\hat{\theta})$ 和 $\mathrm{SE}(\hat{\theta})$ . A measure of how we would expect the estimate we compute from data to vary as we independently resample the dataset from the underlying data generating process.
+- $\mathrm{Var}(\hat{\theta})$ 和 $\mathrm{SE}(\hat{\theta})$ . A measure of how we would expect the estimate we compute from data to vary as we independently **resample the dataset from the underlying data generating process.**
 - 主要应用: **standard error of the mean**
   - 即 “sample mean” 这个 estimator 的 standard error
   - $SE(\hat{\mu}_m) = \sigma / \sqrt{m}$  . 于是可转而用 $\sigma$ 的估计量来表示.
@@ -219,7 +219,7 @@
 
 ### Conditional log-likelihood and MSE
 
-- #quiz 通过推导证明: 最小化 MSE 等价于最大化似然函数 (也等价于最小化交叉熵)
+- 自测题: 通过推导证明: 最小化 MSE 等价于最大化似然函数 (也等价于最小化交叉熵)
   - 提示: 假设 $p(y|x) = N(y;\hat{y}(x;w), \sigma^2)$
 
 ### Properties of maximum likelihood
@@ -252,7 +252,7 @@
   - 训练数据有限时, 泛化性能常常更好.
   - 训练数据较多时, 计算代价更大.
 
-### 贝叶斯方法的线性回归
+### 贝叶斯方法求解线性回归
 
 - 训练数据记为 $X, y$
 - y 的条件分布: 假定为高斯分布
