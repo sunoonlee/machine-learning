@@ -4,6 +4,7 @@
 - 部分 Homework 解答和笔记: [homeworks.ipynb](https://github.com/sunoonlee/machine-learning/blob/master/learning_from_data/Homeworks.ipynb)
 - 推荐安装 chrome 插件 [GitHub with MathJax](https://chrome.google.com/webstore/detail/github-with-mathjax/ioemnmodlmafdkllaclgeombjnmnbima), 支持 Github 上的 LaTeX 公式渲染.
 
+## 目录
 <!-- toc -->
 
 - [Lec 1 The Learning problem](#lec-1-the-learning-problem)

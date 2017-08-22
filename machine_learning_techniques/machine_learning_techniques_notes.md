@@ -7,6 +7,7 @@
   - lec12~15 distilling hidden features: extraction models. 深度学习, rbf网络, 矩阵分解
   - Lec16 happy learning
 
+## 目录
 <!-- toc -->
 
 - [combining predictive features](#combining-predictive-features)

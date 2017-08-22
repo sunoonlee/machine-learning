@@ -3,6 +3,7 @@ Coursera Machine Learning 课程笔记
 - 课程页面: https://www.coursera.org/learn/machine-learning
 - 网上一份很详细的笔记 → http://www.holehouse.org/mlclass/
 
+## 目录
 <!-- toc -->
 
 - [w1 intro + 单变量线性回归 + 线代回顾](#w1-intro--%E5%8D%95%E5%8F%98%E9%87%8F%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92--%E7%BA%BF%E4%BB%A3%E5%9B%9E%E9%A1%BE)
