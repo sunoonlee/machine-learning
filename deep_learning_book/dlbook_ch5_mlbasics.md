@@ -1,19 +1,52 @@
 # Ch5 machine learning basics
 - http://www.deeplearningbook.org/contents/ml.html
 
-[x] pre-read 5.1-5.4
-[x] 5.1 Learning Algorithms
-[x] 5.2 Capacity, Overfitting and Underfitting 
-[x] 5.3 Hyperparameters and Validation Sets
-[x] 5.4 Estimators, Bias and Variance
-[x] 5.5 Maximum Likelihood Estimation 
-[x] 5.6 Bayesian Statistics 
-[ ] 5.7 Supervised Learning Algorithms 
-[ ] 5.8 Unsupervised Learning Algorithms 
-[ ] 5.9 Stochastic Gradient Descent
-[ ] 5.10 Building a Machine Learning Algorithm 
-[ ] 5.11 Challenges Motivating Deep Learning
+- [x] 5.1 Learning Algorithms
+- [x] 5.2 Capacity, Overfitting and Underfitting 
+- [x] 5.3 Hyperparameters and Validation Sets
+- [x] 5.4 Estimators, Bias and Variance
+- [x] 5.5 Maximum Likelihood Estimation 
+- [x] 5.6 Bayesian Statistics 
+- [ ] 5.7 Supervised Learning Algorithms 
+- [ ] 5.8 Unsupervised Learning Algorithms 
+- [ ] 5.9 Stochastic Gradient Descent
+- [ ] 5.10 Building a Machine Learning Algorithm 
+- [ ] 5.11 Challenges Motivating Deep Learning
 
+## 目录
+
+<!-- toc -->
+
+- [Deep learning book organization](#deep-learning-book-organization)
+- [Ch5 intro](#ch5-intro)
+- [5.1 Learning Algorithms](#51-learning-algorithms)
+  * [Task](#task)
+  * [Performance measure](#performance-measure)
+  * [Experience](#experience)
+- [5.2 Capacity, Overﬁtting and Underﬁtting](#52-capacity-over%EF%AC%81tting-and-under%EF%AC%81tting)
+  * [机器学习的核心挑战: 泛化](#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%A0%B8%E5%BF%83%E6%8C%91%E6%88%98-%E6%B3%9B%E5%8C%96)
+  * [模型的 capacity](#%E6%A8%A1%E5%9E%8B%E7%9A%84-capacity)
+  * [Bayes error](#bayes-error)
+  * [The No Free Lunch Theorem](#the-no-free-lunch-theorem)
+  * [Regularization](#regularization)
+- [5.3 Hyperparameters and Validation Sets](#53-hyperparameters-and-validation-sets)
+  * [超参数](#%E8%B6%85%E5%8F%82%E6%95%B0)
+  * [validation set](#validation-set)
+  * [cross-validation](#cross-validation)
+- [5.4 Estimators, Bias and Variance](#54-estimators-bias-and-variance)
+  * [Point Estimation](#point-estimation)
+  * [Bias](#bias)
+  * [Variance and Standard Error](#variance-and-standard-error)
+  * [Trading off bias and variance to minimize MSE](#trading-off-bias-and-variance-to-minimize-mse)
+  * [Consistency](#consistency)
+- [5.5 Maximum Likelihood Estimation](#55-maximum-likelihood-estimation)
+  * [Conditional log-likelihood and MSE](#conditional-log-likelihood-and-mse)
+  * [Properties of maximum likelihood](#properties-of-maximum-likelihood)
+- [5.6 Bayesian Statistics](#56-bayesian-statistics)
+  * [贝叶斯方法求解线性回归](#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95%E6%B1%82%E8%A7%A3%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92)
+  * [MAP Estimation](#map-estimation)
+
+<!-- tocstop -->
 
 ## Deep learning book organization
 

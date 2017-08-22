@@ -1,6 +1,19 @@
 # Ch3 Probability and InformationTheory
 http://www.deeplearningbook.org/contents/prob.html
 
+## 目录
+
+<!-- toc -->
+
+- [3.1 Why Probability](#31-why-probability)
+- [3.2~3.8 一些概率论基础知识](#3238-%E4%B8%80%E4%BA%9B%E6%A6%82%E7%8E%87%E8%AE%BA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)
+- [3.9 Common probability distributions](#39-common-probability-distributions)
+- [3.10 Useful properties of common functions](#310-useful-properties-of-common-functions)
+- [3.13 Infomation theory](#313-infomation-theory)
+- [3.14 Structured probabilistic models](#314-structured-probabilistic-models)
+
+<!-- tocstop -->
+
 ## 3.1 Why Probability
 - 计算机科学的大多数分支都不像机器学习这样依赖概率论, 因为机器学习的研究对象具有 uncertainty 和 stochasticity.
 - 世间万物往往都有不确定性. 不确定性的三个来源:

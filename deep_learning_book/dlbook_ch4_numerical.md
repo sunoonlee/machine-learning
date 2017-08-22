@@ -2,6 +2,18 @@
 
 - http://www.deeplearningbook.org/contents/numerical.html
 
+## 目录
+
+<!-- toc -->
+
+- [4.1 overflow and underflow](#41-overflow-and-underflow)
+- [4.2 poor conditioning](#42-poor-conditioning)
+- [4.3 gradient-based optimization](#43-gradient-based-optimization)
+- [4.3.1 Beyond the gradient: Jacobian and Hessian matrices](#431-beyond-the-gradient-jacobian-and-hessian-matrices)
+- [4.4 constrained optimization](#44-constrained-optimization)
+
+<!-- tocstop -->
+
 ## 4.1 overflow and underflow
 - underflow: 接近0的数直接变成了0. 这样某些函数会出问题, 如 x/0, 或 log 0.
 - overflow: 绝对值很大的数被当做 $\infty$ 或 $-\infty$. 进一步运算时, 无穷大数值通常会被转为 NaN
