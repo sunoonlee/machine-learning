@@ -8,6 +8,7 @@
   + [ch3 概率论与信息论简介](deep_learning_book/dlbook_ch3_prob.md)
   + [ch4 Numerical Computation](deep_learning_book/dlbook_ch4_numerical.md)
   + [ch5 Machine Learning basics](deep_learning_book/dlbook_ch5_mlbasics.md)
+- [统计学习方法 笔记](statistical_learning_method/statistical_learning_method_notes.md) 李航博士的书
 
 练习
 * [perceptron](perceptron/perceptron.ipynb): 简单的感知机例子
