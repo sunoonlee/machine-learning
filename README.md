@@ -17,4 +17,5 @@
 * [word_embeddings](word_embeddings/word_embeddings.ipynb): 训练 word embeddings
 * [nn_sentiment](nn_sentiment/): 神经网络用于文本分类
 * [rnn_language_model](rnn_language_model/): RNN 语言模型
+* [seq2seq_textsum](seq2seq_textsum/): 利用 seq2seq 实现文本摘要
 
