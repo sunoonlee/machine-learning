@@ -140,7 +140,6 @@
 ### motivation of boosting
 
 - 一个浅显的例子: 老师带领学生识别苹果
-- 有点像自动的 error analysis ?
 
 ### diversity by re-weighting
 
@@ -349,8 +348,8 @@
 - example weights of AdaBoost
   - 前面讲过的 AdaBoost weights 更新过程可以表达为更数学化的形式:
     -  $u_n^{(T+1)} = \frac{1}{N} \exp(-y_n\sum_{t=1}^T\alpha_t g_t(x_n))$
-    - // 二分类问题, 当 label 为 {-1, 1} 时: $y_nh(x_n)$ = 1 (分类正确), 或-1 (分类错误)
-    - $\sum_{t=1}^T\alpha_t g_t(x)$ : voting score, 记为 s
+    -  // 二分类问题, 当 label 为 {-1, 1} 时: $y_nh(x_n)$ = 1 (分类正确), 或-1 (分类错误)
+    -  $\sum_{t=1}^T\alpha_t g_t(x)$ : voting score, 记为 s
 - voting score and margin
   - 类比 SVM, $y\cdot s$ 即为 signed & unnormalized margin
   - 因此, 减小 $u_n^{(T+1)}$ 相当于增大 margin
@@ -386,11 +385,11 @@
 - 四种 aggregation models
 
 | model          | diverse $g_t$ by | voting 方式                      | 以 DTree 为 base learner       |
-| -------------- | ------------------ | ------------------------------ | ---------------------------- |
-| bagging        | bootstrapping      | uniform vote                   | strong DTree → random forest |
-| AdaBoost       | reweighting        | linear vote by steepest search | weak DTree → AdaBoost-DTree  |
-| Gradient Boost | residual fitting   | linear vote by steepest search | weak DTree → GBDT            |
-| decision tree  | data splitting     | conditional vote by branching  | -                            |
+| -------------- | ---------------- | ------------------------------ | ---------------------------- |
+| bagging        | bootstrapping    | uniform vote                   | strong DTree → random forest |
+| AdaBoost       | reweighting      | linear vote by steepest search | weak DTree → AdaBoost-DTree  |
+| Gradient Boost | residual fitting | linear vote by steepest search | weak DTree → GBDT            |
+| decision tree  | data splitting   | conditional vote by branching  | -                            |
 
 - 两类 aggregation 方法的功效完全不同
   - 一类是降低 bias, 解决较弱的 base learner 的欠拟合问题, 使弱弱联合变强, 效果类似 feature transform. 例子是 Boost.
