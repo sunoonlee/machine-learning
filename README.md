@@ -18,4 +18,5 @@
 * [nn_sentiment](nn_sentiment/): 神经网络用于文本分类
 * [rnn_language_model](rnn_language_model/): RNN 语言模型
 * [seq2seq_textsum](seq2seq_textsum/): 利用 seq2seq 实现文本摘要
+* [seq2seq_nmt](seq2seq_nmt/): 利用 seq2seq 实现机器翻译
 
